@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="3.8.4" group="content" method="upgrade">
+    <name>PLG_CONTENT_QLTABS</name>
+    <author>Mareike Riegel</author>
+    <creationDate>February 2018</creationDate>
+    <copyright>Copyright (C) 2018 ql.de All rights reserved.</copyright>
+    <authorEmail>mareike.riegel@ql.de</authorEmail>
+    <authorUrl>http://ql.de/</authorUrl>
+    <version>2.2.0</version>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <description>PLG_CONTENT_QLTABS_DESCRIPTION</description>
+    <files>
+        <filename plugin="qltabs">qltabs.php</filename>
+        <filename plugin="qltabs">index.html</filename>
+        <filename plugin="qltabs">license.txt</filename>
+        <folder plugin="qltabs">css</folder>
+        <folder plugin="qltabs">tmpl</folder>
+        <folder plugin="qltabs">js</folder>
+        <folder plugin="qltabs">language</folder>
+        <folder plugin="qltabs">php</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_content_qltabs.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_content_qltabs.sys.ini</language>
+    </languages>
+    <media folder="media" destination="plg_content_qltabs">
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <updateservers>
+        <server type="extension" priority="1" name="qltabs - Updates"><![CDATA[https://www.blackforest-software.com/_scripts/updates/plg_content_qltabs.xml]]></server>
+    </updateservers>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="jquery" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_JQUERY_DESC"
+                       label="PLG_CONTENT_QLTABS_JQUERY_LABEL"
+                        >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="defaultType" type="radio"
+                       class="btn-group"
+                       default="horizontal"
+                       description="PLG_CONTENT_QLTABS_DEFAULTTYPE_DESC"
+                       label="PLG_CONTENT_QLTABS_DEFAULTTYPE_LABEL"
+                        >
+                    <option value="horizontal">PLG_CONTENT_QLTABS_HORIZONTAL</option>
+                    <option value="vertical">PLG_CONTENT_QLTABS_VERTICAL</option>
+                </field>
+            </fieldset>
+            <fieldset name="horizontal">
+                <field name="horizontalSpacer" type="spacer" label="PLG_CONTENT_QLTABS_HORIZONTAL_DESCRIPTION"/>
+                <field name="displayEffect" type="list"
+                       default="plop"
+                       label="PLG_CONTENT_QLTABS_EFFECT_LABEL"
+                       description="PLG_CONTENT_QLTABS_EFFECT_DESC"
+                        >
+                    <option value="plop">PLG_CONTENT_QLTABS_PLOP</option>
+                    <option value="fadein">PLG_CONTENT_QLTABS_FADEIN</option>
+                    <option value="slidedown">PLG_CONTENT_QLTABS_SLIDEDOWN</option>
+                </field>
+                <field name="style" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_STYLE_DESC"
+                       label="PLG_CONTENT_QLTABS_STYLE_LABEL"
+                        >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="backgroundcolor" type="color"
+                       default="#eeeeee"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                        />
+                <field name="backgroundopacity" type="integer"
+                       default="100"
+                       step="1"
+                       first="0"
+                       last="100"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_LABEL"
+                        />
+                <field name="fontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
+                        />
+                <field name="bordercolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
+                        />
+                <field name="borderwidth" type="integer"
+                       default="1"
+                       first="0"
+                       last="20"
+                       step="1"
+                       description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
+                        />
+                <field name="bordertype" type="list"
+                       default="1"
+                       description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
+                        >
+                    <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
+                    <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
+                    <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
+                </field>
+                <field name="inactivebackgroundcolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
+                        />
+                <field name="inactivefontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
+                        />
+            </fieldset>
+            <fieldset name="vertical">
+                <field name="verticalSpacer" type="spacer" label="PLG_CONTENT_QLTABS_VERTICAL_DESCRIPTION"/>
+                <field name="verticalDisplayEffect" type="list"
+                       default="plop"
+                       label="PLG_CONTENT_QLTABS_EFFECT_LABEL"
+                       description="PLG_CONTENT_QLTABS_EFFECT_DESC"
+                        >
+                    <option value="plop">PLG_CONTENT_QLTABS_PLOP</option>
+                    <option value="fadein">PLG_CONTENT_QLTABS_FADEIN</option>
+                    <option value="slidedown">PLG_CONTENT_QLTABS_SLIDEDOWN</option>
+                </field>
+                <field name="verticalWidthbuttons" type="integer"
+                       default="25"
+                       label="PLG_CONTENT_QLTABS_WIDTHBUTTONS_LABEL"
+                       description="PLG_CONTENT_QLTABS_WIDTHBUTTONS_DESC"
+                       first="1"
+                       step="1"
+                       last="100"
+                        >
+                </field>
+                <field name="verticalStyle" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_STYLE_DESC"
+                       label="PLG_CONTENT_QLTABS_STYLE_LABEL"
+                        >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="verticalBackgroundcolor" type="color"
+                       default="#eeeeee"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                        />
+                <field name="verticalBackgroundopacity" type="integer"
+                       default="100"
+                       step="1"
+                       first="0"
+                       last="100"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_LABEL"
+                        />
+                <field name="verticalFontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
+                        />
+                <field name="verticalBordercolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
+                        />
+                <field name="verticalBorderwidth" type="integer"
+                       default="1"
+                       first="0"
+                       last="20"
+                       step="1"
+                       description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
+                        />
+                <field name="verticalBordertype" type="list"
+                       default="1"
+                       description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
+                        >
+                    <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
+                    <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
+                    <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
+                </field>
+                <field name="verticalInactivebackgroundcolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
+                        />
+                <field name="verticalInactivefontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
+                        />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

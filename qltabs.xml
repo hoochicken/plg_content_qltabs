@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" version="3.9.10" group="content" method="upgrade">
+<extension type="plugin" version="4.0.0" group="content" method="upgrade">
     <name>PLG_CONTENT_QLTABS</name>
     <author>Mareike Riegel</author>
     <creationDate>May 2022</creationDate>
     <copyright>Copyright (C) 2022 ql.de All rights reserved.</copyright>
     <authorEmail>mareike.riegel@ql.de</authorEmail>
     <authorUrl>http://ql.de/</authorUrl>
-    <version>2.2.8</version>
+    <version>3.0.0</version>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <description>PLG_CONTENT_QLTABS_DESCRIPTION</description>
     <files>
@@ -27,9 +27,9 @@
         <folder>css</folder>
         <folder>js</folder>
     </media>
-    <updateservers>
+    <!--updateservers>
         <server type="extension" priority="1" name="qltabs - Updates"><![CDATA[https://www.blackforest-software.com/_scripts/updates/plg_content_qltabs.xml]]></server>
-    </updateservers>
+    </updateservers-->
     <config>
         <fields name="params">
             <fieldset name="basic">
@@ -72,7 +72,7 @@
                 </field>
             </fieldset>
             <fieldset name="horizontal">
-                <field name="horizontalSpacer" type="spacer" label="PLG_CONTENT_QLTABS_HORIZONTAL_DESCRIPTION"/>
+                <field name="horizontalSpacer" type="note" label="PLG_CONTENT_QLTABS_HORIZONTAL_DESCRIPTION"/>
                 <field name="displayEffect" type="list"
                        default="plop"
                        label="PLG_CONTENT_QLTABS_EFFECT_LABEL"
@@ -143,7 +143,7 @@
                         />
             </fieldset>
             <fieldset name="vertical">
-                <field name="verticalSpacer" type="spacer" label="PLG_CONTENT_QLTABS_VERTICAL_DESCRIPTION"/>
+                <field name="verticalSpacer" type="note" label="PLG_CONTENT_QLTABS_VERTICAL_DESCRIPTION"/>
                 <field name="verticalDisplayEffect" type="list"
                        default="plop"
                        label="PLG_CONTENT_QLTABS_EFFECT_LABEL"

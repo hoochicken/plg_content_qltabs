@@ -8,7 +8,11 @@ defined('_JEXEC') or die;
 
 class clsPlgContentQltabsColor
 {
-    function html2rgb($strColor)
+    /**
+     * @param string $strColor
+     * @return array
+     */
+    function html2rgb(string $strColor): array
     {
         //strip '#' in beginning of string given
         if ('#' === $strColor[0]) {

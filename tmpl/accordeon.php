@@ -8,6 +8,9 @@
 
 //no direct access
 defined('_JEXEC') or die ('Restricted Access');
+/** @var int $intCounter */
+/** @var array $arrTabAttributes */
+/** @var array $arr */
 ?>
 <div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon<?php echo $arrTabAttributes['class']; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
     <?php foreach ($arr as $k => $v) : ?>

@@ -15,25 +15,26 @@ jimport('joomla.plugin.plugin');
 class plgContentQltabs extends JPlugin
 {
 
-    protected $strCallStart = 'qltabs';
-    protected $strCallStart2 = 'qltab';
-    protected $strCallEnd = '/qltabs';
-    protected $arrStates = [];
-    protected $arrTabAttributes = [];
+    protected string $strCallStart = 'qltabs';
+    protected string $strCallStart2 = 'qltab';
+    protected string $strCallEnd = '/qltabs';
+    protected array $arrStates = [];
+    protected array $arrTabAttributes = [];
     public $objParams;
-    private $arrReplace = [];
-    private $boolDebug = false;
+    private array $arrReplace = [];
+    private bool $boolDebug = false;
+    private array $arrAttributes = [];
 
     /**
      * onContentPrepare :: some kind of controller of plugin
-     * @param $strContext
+     * @param string $strContext
      * @param $objArticle
      * @param $objParams
-     * @param int $numPage
-     * @return bool
+     * @param ?int $numPage
+     * @return bool|void
      * @throws Exception
      */
-    public function onContentPrepare($strContext, &$objArticle, &$objParams, $numPage = 0)
+    public function onContentPrepare(string $strContext, &$objArticle, &$objParams, ?int $numPage = 0)
     {
         //if search => ignore
         if ('com_finder.indexer' === $strContext) {
@@ -64,7 +65,7 @@ class plgContentQltabs extends JPlugin
         }
 
         //if no plg tag in article => ignore
-        if (false === strpos($objArticle->text, '{' . $this->strCallStart2) || false === strpos($objArticle->text, '{' . $this->strCallEnd . '}')) {
+        if (!str_contains($objArticle->text, '{' . $this->strCallStart2) || !str_contains($objArticle->text, '{' . $this->strCallEnd . '}')) {
             return true;
         }
 
@@ -87,7 +88,7 @@ class plgContentQltabs extends JPlugin
      * @return mixed
      * @internal param $text
      */
-    private function replaceStartTags($strText)
+    private function replaceStartTags($strText): mixed
     {
         //get matches
         $arrMatches = $this->getMatches($strText);
@@ -111,11 +112,11 @@ class plgContentQltabs extends JPlugin
     }
 
     /**
-     * @param $intCounter
-     * @param $string
-     * @return bool
+     * @param int $intCounter
+     * @param string $string
+     * @return void
      */
-    private function getArrayReplaces($intCounter, $string)
+    private function getArrayReplaces(int $intCounter, string $string): void
     {
         $this->arrReplace[$intCounter] = [];
         $this->arrTabAttributes[$intCounter] = [];
@@ -129,7 +130,7 @@ class plgContentQltabs extends JPlugin
         $strRegex = '~{' . $this->strCallStart2 . ' title?=?"(.+?)"}(.+?)(?={(' . $this->strCallStart2 . '|' . $this->strCallEnd . '))~s';
         preg_match_all($strRegex, $string, $arrMatches);
         if (!isset($arrMatches[0])) {
-            return false;
+            return;
         }
 
         $strIdentifier = $intCounter;
@@ -143,14 +144,13 @@ class plgContentQltabs extends JPlugin
             $this->arrReplace[$intCounter][$k]['content'] = $arrMatches[2][$k];
             $this->arrReplace[$intCounter][$k]['id'] = 'qltab' . $strIdentifier . '-' . $k;
         }
-        return $this->arrReplace;
     }
 
     /**
-     * @param $intCounter
+     * @param int $intCounter
      * @param string $string
      */
-    private function getTagAttributes($intCounter, $string = '')
+    private function getTagAttributes(int $intCounter, string $string = '')
     {
         //set default values
         $arrValue = ['class' => '', 'style' => '', 'id' => '', 'type' => '',];
@@ -161,7 +161,7 @@ class plgContentQltabs extends JPlugin
         foreach ($arrMatches[1] as $k => $v) {
             $arrValue[$v] = trim($arrMatches[2][$k]);
         }
-        if (false === strpos($arrValue['class'], 'horizontal') && false === strpos($arrValue['class'], 'vertical')) {
+        if (!str_contains($arrValue['class'], 'horizontal') && !str_contains($arrValue['class'], 'vertical')) {
             $arrValue['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
         }
         if (false && 'vertical' === $this->objParams->get('defaultType', 'horizontal')) {
@@ -171,9 +171,9 @@ class plgContentQltabs extends JPlugin
             }
         }
         if (0 == preg_match('/(plop|fadein|slidedown)/', $arrValue['class'])) {
-            if (false !== strpos($arrValue['class'], 'horizontal')) {
+            if (str_contains($arrValue['class'], 'horizontal')) {
                 $arrValue['class'] .= ' ' . $this->objParams->get('displayEffect', 'plop');
-            } elseif (false !== strpos($arrValue['class'], 'vertical')) {
+            } elseif (str_contains($arrValue['class'], 'vertical')) {
                 $arrValue['class'] .= ' ' . $this->objParams->get('verticalDisplayEffect', 'plop');
             }
         }
@@ -186,7 +186,7 @@ class plgContentQltabs extends JPlugin
      * @param $string
      * @return array
      */
-    private function getMatches($string)
+    private function getMatches($string): array
     {
         //get matches to {qltabs}
         $strRegex = '~{' . $this->strCallStart . '(.*?)}(.+?){' . $this->strCallEnd . '}~s';
@@ -196,10 +196,10 @@ class plgContentQltabs extends JPlugin
 
     /**
      * method to get attributes
-     * @param $string
+     * @param string $string
      * @return array
      */
-    private function getAttributes($string)
+    private function getAttributes(string $string): array
     {
         $strSelector = implode('|', $this->arrAttributes);
         preg_match_all('~(' . $strSelector . ')="(.+?)"~s', $string, $arrMatches);
@@ -215,12 +215,12 @@ class plgContentQltabs extends JPlugin
     }
 
     /**
-     * @param $strStart
-     * @param $strEnd
-     * @param $strHaystack
+     * @param string $strStart
+     * @param string $strEnd
+     * @param string $strHaystack
      * @return array
      */
-    private function getMatchesInString($strStart, $strEnd, $strHaystack)
+    private function getMatchesInString(string $strStart, string $strEnd, string $strHaystack): array
     {
         $needle = '~{' . $strStart . '(.*?)' . $strEnd . '}~s';
         preg_match_all($needle, $strHaystack, $arrMatches);
@@ -233,7 +233,7 @@ class plgContentQltabs extends JPlugin
      * @param $str
      * @return mixed
      */
-    private function clearTags($str)
+    private function clearTags($str): string
     {
         $str = str_replace('<p>{' . $this->strCallEnd . '}', '{' . $this->strCallEnd . '}<p>', $str);
         $str = str_replace('{' . $this->strCallEnd . '}', '{' . $this->strCallEnd . '}', $str);
@@ -259,17 +259,17 @@ class plgContentQltabs extends JPlugin
     }
 
     /**
-     * @param $intCounter
-     * @param $arr
-     * @param $arrTabAttributes
+     * @param int $intCounter
+     * @param array $arr
+     * @param array $arrTabAttributes
      * @return string
      */
-    private function getHtml($intCounter, $arr, $arrTabAttributes)
+    private function getHtml(int $intCounter, array $arr, array $arrTabAttributes): string
     {
         $objParams = $this->objParams;
         $arrAttributes = $this->arrStates;
         ob_start();
-        if (false !== strpos($arrTabAttributes['class'], 'accordeon')) {
+        if (str_contains($arrTabAttributes['class'], 'accordeon')) {
             $strLayoutFile = 'accordeon';
         } else {
             $strLayoutFile = 'default';
@@ -352,7 +352,7 @@ class plgContentQltabs extends JPlugin
      * @param $opacity
      * @return string
      */
-    private function getBgColor($bg, $opacity)
+    private function getBgColor($bg, $opacity): string
     {
         include_once __DIR__ . '/php/clsPlgContentQltabsColor.php';
         $objColor = new clsPlgContentQltabsColor;

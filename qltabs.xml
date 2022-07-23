@@ -71,6 +71,9 @@
                     <option value="accordeon">PLG_CONTENT_QLTABS_ACCORDEON</option>
                 </field>
             </fieldset>
+            <fieldset name="description">
+                <field name="horizontalSpacer" type="note" label="PLG_CONTENT_QLTABS_DESCRIPTION"/>
+            </fieldset>
             <fieldset name="horizontal">
                 <field name="horizontalSpacer" type="note" label="PLG_CONTENT_QLTABS_HORIZONTAL_DESCRIPTION"/>
                 <field name="displayEffect" type="list"
@@ -132,7 +135,7 @@
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
                 <field name="inactivebackgroundcolor" type="color"
-                       default="#eeeeee"
+                       default="#e7e7e7"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
@@ -212,7 +215,7 @@
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
                 <field name="verticalInactivebackgroundcolor" type="color"
-                       default="#ffffff"
+                       default="#e7e7e7"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />

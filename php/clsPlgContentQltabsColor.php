@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     tpl_qltemplate
- * @copyright   Copyright (C) 2017 Mareike Riegel
+ * @copyright   Copyright (C) 2022 Mareike Riegel
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;

@@ -1,25 +1,20 @@
 /**
  * @package        plg_content_qltabs
- * @copyright      Copyright (C) 2022 ql.de All rights reserved.
- * @author         Mareike Riegel mareike.riegel@ql.de
+ * @copyright    Copyright (C) 2018 ql.de All rights reserved.
+ * @author        Mareike Riegel mareike.riegel@ql.de
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
 jQuery(document).ready(function () {
-
-    if (isMobileDevice()) {
-        jQuery('.qltabs_container').addClass('mobileDetected');
-    }
-
-    jQuery('.qltabs_container > .qltabs_head').children('div:first-child').addClass('active');
-    jQuery('.qltabs_container > .qltabs').children('div:first-child').addClass('active');
-    jQuery('.qltabs_container.fadein > .qltabs').children('div:first-child').css('display', 'block');
-    jQuery('.qltabs_container.slidedown > .qltabs').children('div:first-child').css('display', 'block');
+    jQuery('.qltabs_container .qltabs_head').children('div:first').addClass('active');
+    jQuery('.qltabs_container .qltabs').children('div:first').addClass('active');
+    jQuery('.qltabs_container.fadein .qltabs').children('div:first').css('display', 'block');
+    jQuery('.qltabs_container.slidedown .qltabs').children('div:first-child').css('display', 'block');
     jQuery('.qltabs_accordeon').find('.qltab_content').css('display', 'none');
 
     qlSetActiveTabl();
 
     jQuery('.qltabs_container.default .qltab_head').click(function () {
-        var classs = jQuery(this).attr('id') + '_content';
+        let classs = jQuery(this).attr('id') + '_content';
         jQuery(this).parent('div').next('div').children('div.qltab_content').removeClass('active');
         jQuery('#' + classs).attr('class', 'qltab_content active');
         jQuery(this).parent('div').children('.qltab_head').removeClass('active');
@@ -29,7 +24,7 @@ jQuery(document).ready(function () {
 
     jQuery('.qltabs_accordeon .qltab_head').click(function () {
         //jQuery(this).parent('div').siblings('div').children('div').removeClass('active');
-        var strDisplay = jQuery(this).next('.qltab_content').css('display');
+        let strDisplay = jQuery(this).next('.qltab_content').css('display');
         if('block' === strDisplay) {
             jQuery(this).removeClass('active');
             jQuery(this).next('.qltab_content').removeClass('active');
@@ -46,6 +41,7 @@ jQuery(document).ready(function () {
         jQuery(this).parent('div').next('div').children('div.qltab_content.active').fadeIn('slow');
         return false;
     });
+
     jQuery('.qltabs_container.slidedown.default .qltab_head').click(function () {
         jQuery(this).parent('div').next('div').children('div.qltab_content').slideUp();
         jQuery(this).parent('div').next('div').children('div.qltab_content.active').slideDown();
@@ -58,18 +54,18 @@ jQuery(document).ready(function () {
  * function to set a tab into active if set so by get-params in url
  */
 function qlSetActiveTabl() {
-    var tabs = qlGetUrlParam('qltab');
+    let tabs = qlGetUrlParam('qltab');
     if ('' == tabs) {
         return;
     }
 
-    var tabsToOpen = tabs.split(",");
-    for (var i = 0; i < tabsToOpen.length; i++) {
-        var idTabHeader = tabsToOpen[i];
+    let tabsToOpen = tabs.split(",");
+    for (let i = 0; i < tabsToOpen.length; i++) {
+        let idTabHeader = tabsToOpen[i];
         if (jQuery('#' + idTabHeader).qlExists()) {
-            var tabsFamily = tabs.split("-");
+            let tabsFamily = tabs.split("-");
             tabsFamily = tabsFamily[0];
-            var idTabContainer = idTabHeader + '_content';
+            let idTabContainer = idTabHeader + '_content';
 
             jQuery('#' + idTabHeader).parent('div').children('.qltab_head').removeClass('active');
             jQuery('#' + idTabHeader).attr('class', jQuery('#' + idTabHeader).attr('class') + ' active');
@@ -95,17 +91,13 @@ jQuery.fn.qlExists = function () {
  * @return {*}
  */
 function qlGetUrlParam(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
-        var getVar = vars[i].split("=");
+    let query = window.location.search.substring(1);
+    let vars = query.split("&");
+    for (let i = 0; i < vars.length; i++) {
+        let getVar = vars[i].split("=");
         if (getVar[0] == variable) {
             return getVar[1];
         }
     }
     return (false);
-}
-
-function isMobileDevice() {
-    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }

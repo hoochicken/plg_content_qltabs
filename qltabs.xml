@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" version="3.8.4" group="content" method="upgrade">
+<extension type="plugin" version="3.9.10" group="content" method="upgrade">
     <name>PLG_CONTENT_QLTABS</name>
     <author>Mareike Riegel</author>
-    <creationDate>February 2022</creationDate>
-    <copyright>Copyright (C) 2022 ql.de All rights reserved.</copyright>
+    <creationDate>May 2021</creationDate>
+    <copyright>Copyright (C) 2021 ql.de All rights reserved.</copyright>
     <authorEmail>mareike.riegel@ql.de</authorEmail>
     <authorUrl>http://ql.de/</authorUrl>
-    <version>2.2.0</version>
+    <version>2.2.8</version>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <description>PLG_CONTENT_QLTABS_DESCRIPTION</description>
     <files>
@@ -33,11 +33,29 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field name="jquery" type="radio"
+                <field name="qltabsjsactive" type="radio"
+                       class="btn-group"
+                       default="1"
+                       description="PLG_CONTENT_QLTABS_QLTABSJSACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_QLTABSJSACTIVE_LABEL"
+                        >
+                    <option value="1">PLG_CONTENT_QLTABS_WHENNEEDED</option>
+                    <option value="2">PLG_CONTENT_QLTABS_ALWAYS</option>
+                </field>
+                 <field name="jquery" type="radio"
                        class="btn-group"
                        default="0"
                        description="PLG_CONTENT_QLTABS_JQUERY_DESC"
                        label="PLG_CONTENT_QLTABS_JQUERY_LABEL"
+                        >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                 <field name="uniqueId" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_UNIQUEID_DESC"
+                       label="PLG_CONTENT_QLTABS_UNIQUEID_LABEL"
                         >
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -50,6 +68,7 @@
                         >
                     <option value="horizontal">PLG_CONTENT_QLTABS_HORIZONTAL</option>
                     <option value="vertical">PLG_CONTENT_QLTABS_VERTICAL</option>
+                    <option value="accordeon">PLG_CONTENT_QLTABS_ACCORDEON</option>
                 </field>
             </fieldset>
             <fieldset name="horizontal">
@@ -73,7 +92,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field name="backgroundcolor" type="color"
-                       default="#eeeeee"
+                       default="#ffffff"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
                         />
@@ -113,7 +132,7 @@
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
                 <field name="inactivebackgroundcolor" type="color"
-                       default="#cdcdcd"
+                       default="#eeeeee"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
@@ -153,7 +172,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field name="verticalBackgroundcolor" type="color"
-                       default="#eeeeee"
+                       default="#ffffff"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
                         />
@@ -193,7 +212,7 @@
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
                 <field name="verticalInactivebackgroundcolor" type="color"
-                       default="#cdcdcd"
+                       default="#ffffff"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />

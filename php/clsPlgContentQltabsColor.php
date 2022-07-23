@@ -1,31 +1,51 @@
 <?php
 /**
- * @package     tpl_qltemplate
- * @copyright   Copyright (C) 2022 Mareike Riegel
+ * @package     plg_content_qltabs
+ * @copyright   Copyright (C) 2021 Mareike Riegel
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
 
 class clsPlgContentQltabsColor
 {
-    function html2rgb($color)
+    function html2rgb($strColor)
     {
-        if ($color[0] == '#') {
-            $color = substr($color, 1);
+        //strip '#' in beginning of string given
+        if ('#' === $strColor[0]) {
+            $strColor = substr($strColor, 1);
         }
-        if (strlen($color) == 6) {
-            list($r, $g, $b) = array($color[0] . $color[1],
-                $color[2] . $color[3],
-                $color[4] . $color[5]);
-        } elseif (strlen($color) == 3) {
-            list($r, $g, $b) = array($color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]);
+
+        //if 6 long, list to strings
+        if (6 === strlen($strColor)) {
+            list($strR, $strG, $strB) = [
+                $strColor[0] . $strColor[1],
+                $strColor[2] . $strColor[3],
+                $strColor[4] . $strColor[5]
+            ];
         }
+        //if 3 long, list to strings
+         elseif (3 === strlen($strColor)) {
+            list($strR, $strG, $strB) = [
+                $strColor[0] . $strColor[0],
+                $strColor[1] . $strColor[1],
+                $strColor[2] . $strColor[2]
+            ];
+        }
+        //use default
         else {
-            return array(255, 255, 255);
-        }//false;
-        $r = hexdec($r);
-        $g = hexdec($g);
-        $b = hexdec($b);
-        return array($r, $g, $b);
+            //set ffffff as default
+            $strR = $strG = $strB = 'ff';
+        }
+
+        //turn hex into dec
+        $intR = hexdec($strR);
+        $intG = hexdec($strG);
+        $intB = hexdec($strB);
+
+        //create return array
+        $arrRgb = [$intR, $intG, $intB];
+
+        //return result
+        return $arrRgb;
     }
 }

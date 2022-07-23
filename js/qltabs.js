@@ -1,14 +1,19 @@
 /**
  * @package        plg_content_qltabs
- * @copyright    Copyright (C) 2022 ql.de All rights reserved.
- * @author        Mareike Riegel mareike.riegel@ql.de
+ * @copyright      Copyright (C) 2021 ql.de All rights reserved.
+ * @author         Mareike Riegel mareike.riegel@ql.de
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
 jQuery(document).ready(function () {
-    jQuery('.qltabs_container .qltabs_head').children('div:first').addClass('active');
-    jQuery('.qltabs_container .qltabs').children('div:first').addClass('active');
-    jQuery('.qltabs_container.fadein .qltabs').children('div:first').css('display', 'block');
-    jQuery('.qltabs_container.slidedown .qltabs').children('div:first-child').css('display', 'block');
+
+    if (isMobileDevice()) {
+        jQuery('.qltabs_container').addClass('mobileDetected');
+    }
+
+    jQuery('.qltabs_container > .qltabs_head').children('div:first-child').addClass('active');
+    jQuery('.qltabs_container > .qltabs').children('div:first-child').addClass('active');
+    jQuery('.qltabs_container.fadein > .qltabs').children('div:first-child').css('display', 'block');
+    jQuery('.qltabs_container.slidedown > .qltabs').children('div:first-child').css('display', 'block');
     jQuery('.qltabs_accordeon').find('.qltab_content').css('display', 'none');
 
     qlSetActiveTabl();
@@ -99,4 +104,8 @@ function qlGetUrlParam(variable) {
         }
     }
     return (false);
+}
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }

@@ -5,7 +5,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-.qltabs_container{clear:both;float:left;width:100%}
+.qltabs_container{clear:both;float:left;width:100%; margin: 10px 0;}
 
 .qltabs_container .qltabs {float:left;width:100%;}
 .qltabs_container.plop .qltabs .qltab_content.active {display:block;}

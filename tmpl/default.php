@@ -14,12 +14,15 @@ defined('_JEXEC') or die ('Restricted Access');
 ?>
 <div id="qltab<?php echo $intCounter; ?>" class="qltabs_container default <?php echo $arrTabAttributes['class']; ?>"
      style="<?php echo $arrTabAttributes['style']; ?>">
-    <div class="qltabs_head">
+    <nav class="qltabs_head">
+        <ul role="navigation">
         <?php foreach ($arr as $k => $v) : ?>
-            <div class="qltab<?php echo $intCounter; ?> qltab_head"
-                 id="<?php echo $v['id']; ?>"><?php echo $v['title']; ?></div>
+            <li class="qltab<?php echo $intCounter; ?> qltab_head"
+                id="<?php echo $v['id']; ?>">
+                <a href="#"><?php echo $v['title']; ?></a></li>
         <?php endforeach; ?>
-    </div>
+        </ul>
+    </nav>
     <div class="qltabs">
         <?php foreach ($arr as $k => $v) : ?>
             <div class="qltab_content" id="<?php echo $v['id']; ?>_content">

@@ -65,7 +65,7 @@ class plgContentQltabs extends JPlugin
         }
 
         //if no plg tag in article => ignore
-        if (!str_contains($objArticle->text, '{' . $this->strCallStart2) || !str_contains($objArticle->text, '{' . $this->strCallEnd . '}')) {
+        if (false === strpos($objArticle->text, '{' . $this->strCallStart2) && false === strpos($objArticle->text, '{' . $this->strCallEnd . '}')) {
             return true;
         }
 
@@ -88,7 +88,7 @@ class plgContentQltabs extends JPlugin
      * @return mixed
      * @internal param $text
      */
-    private function replaceStartTags($strText): mixed
+    private function replaceStartTags($strText)
     {
         //get matches
         $arrMatches = $this->getMatches($strText);
@@ -161,7 +161,7 @@ class plgContentQltabs extends JPlugin
         foreach ($arrMatches[1] as $k => $v) {
             $arrValue[$v] = trim($arrMatches[2][$k]);
         }
-        if (!str_contains($arrValue['class'], 'horizontal') && !str_contains($arrValue['class'], 'vertical')) {
+        if (false === strpos($arrValue['class'], 'horizontal') && false === strpos($arrValue['class'], 'vertical')) {
             $arrValue['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
         }
         if (false && 'vertical' === $this->objParams->get('defaultType', 'horizontal')) {
@@ -171,9 +171,9 @@ class plgContentQltabs extends JPlugin
             }
         }
         if (0 == preg_match('/(plop|fadein|slidedown)/', $arrValue['class'])) {
-            if (str_contains($arrValue['class'], 'horizontal')) {
+            if (false !== strpos($arrValue['class'], 'horizontal')) {
                 $arrValue['class'] .= ' ' . $this->objParams->get('displayEffect', 'plop');
-            } elseif (str_contains($arrValue['class'], 'vertical')) {
+            } elseif (false !== strpos($arrValue['class'], 'vertical')) {
                 $arrValue['class'] .= ' ' . $this->objParams->get('verticalDisplayEffect', 'plop');
             }
         }
@@ -269,7 +269,7 @@ class plgContentQltabs extends JPlugin
         $objParams = $this->objParams;
         $arrAttributes = $this->arrStates;
         ob_start();
-        if (str_contains($arrTabAttributes['class'], 'accordeon')) {
+        if (false !== strpos($arrTabAttributes['class'], 'accordeon')) {
             $strLayoutFile = 'accordeon';
         } else {
             $strLayoutFile = 'default';

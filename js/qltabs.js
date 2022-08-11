@@ -1,29 +1,38 @@
 /**
  * @package        plg_content_qltabs
- * @copyright    Copyright (C) 2022 ql.de All rights reserved.
- * @author        Mareike Riegel mareike.riegel@ql.de
+ * @copyright      Copyright (C) 2022 ql.de All rights reserved.
+ * @author         Mareike Riegel mareike.riegel@ql.de
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
 jQuery(document).ready(function () {
-    jQuery('.qltabs_container .qltabs_head').children('div:first').addClass('active');
-    jQuery('.qltabs_container .qltabs').children('div:first').addClass('active');
-    jQuery('.qltabs_container.fadein .qltabs').children('div:first').css('display', 'block');
-    jQuery('.qltabs_container.slidedown .qltabs').children('div:first-child').css('display', 'block');
-    jQuery('.qltabs_accordeon').find('.qltab_content').css('display', 'none');
+    // TABS set first child active to be displayed
+    jQuery('.qltabs_container .qltabs_head').find('li:first').addClass('active');
+
+    // TAB CONTENTS set first child active to be displayed
+    jQuery('.qltabs_container .qltabs').children('.qltab_content:first-child').addClass('active');
+    jQuery('.qltabs_container.fadein .qltabs').children('.qltab_content:first-child').fadeIn();
+    jQuery('.qltabs_container.slidedown .qltabs').children('.qltab_content:first-child').slideDown();
+    jQuery('.qltabs_container.qltabs_accordeon .qltabs').children('.qltab_content:first-child').slideDown();
 
     qlSetActiveTabl();
 
-    jQuery('.qltabs_container.default .qltab_head').click(function () {
+    jQuery('.qltabs_container.default .qltab_head').click(function (el) {
+        let elementClicked = jQuery(el.currentTarget);
+
+        // adjust table_head
+        elementClicked.siblings('.qltab_head').removeClass('active');
+        elementClicked.addClass('active');
+
+        // adjust tabs with content = display tab clicked on
+        let contentTabs = elementClicked.closest('.qltabs_container').find('.qltab_content');
+        contentTabs.removeClass('active').css('display', 'none');
         let classs = jQuery(this).attr('id') + '_content';
-        jQuery(this).parent('div').next('div').children('div.qltab_content').removeClass('active');
-        jQuery('#' + classs).attr('class', 'qltab_content active');
-        jQuery(this).parent('div').children('.qltab_head').removeClass('active');
-        jQuery(this).attr('class', jQuery(this).attr('class') + ' active');
+        jQuery('#' + classs).addClass('active').css('display', 'block');
         return false;
     });
 
+    // default => just display and hide by class 'active'
     jQuery('.qltabs_accordeon .qltab_head').click(function () {
-        //jQuery(this).parent('div').siblings('div').children('div').removeClass('active');
         let strDisplay = jQuery(this).next('.qltab_content').css('display');
         if('block' === strDisplay) {
             jQuery(this).removeClass('active');

@@ -12,11 +12,11 @@ defined('_JEXEC') or die ('Restricted Access');
 /** @var array $arrTabAttributes */
 /** @var array $arr */
 ?>
-<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon<?php echo $arrTabAttributes['class']; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
+<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon <?php echo $arrTabAttributes['class']; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
     <?php foreach ($arr as $k => $v) : ?>
         <div class="section">
-            <div class="qltab<?php echo $intCounter; ?> qltab_head" id="<?php echo $v['id']; ?>"><a href="#"><?php echo $v['title']; ?></a></div>
-            <div class="qltab_content" id="<?php echo $v['id']; ?>_content">
+            <div role="button" tabindex="0" class="qltab<?php echo $intCounter; ?> qltab_head" id="<?php echo $v['id']; ?>"><a href="#"><?php echo $v['title']; ?></a></div>
+            <div tabindex="-1" class="qltab_content" id="<?php echo $v['id']; ?>_content">
                 <?php echo $v['content']; ?>
             </div>
         </div>

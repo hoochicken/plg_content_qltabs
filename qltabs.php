@@ -298,8 +298,8 @@ class plgContentQltabs extends JPlugin
         $strBackgroundColorInactive = $this->getBgColor($this->objParams->get('inactivebackgroundcolor'), $numOpacity);
 
         $arrStyle = [];
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head > .qltab_head {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head > .qltab_head.active {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $strFontColor . '}';
+        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > a {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
+        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head.active > a {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $strFontColor . '}';
         $arrStyle[] = '.qltabs_container.horizontal > .qltab_content {background:' . $strBackgroundColor . ';}';
         $arrStyle[] = '.qltabs_container.horizontal > .qltabs {background:' . $strBackgroundColor . ';border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';}';
         $arrStyle[] = '.qltabs_container.horizontal > .qltabs > .qltab_content {display:none;background:' . $strBackgroundColor . ';color:' . $strFontColor . ';}';
@@ -325,11 +325,11 @@ class plgContentQltabs extends JPlugin
         $backgroundColorInactive = $this->getBgColor($this->objParams->get('verticalInactivebackgroundcolor'), $opacity);
         $fontColorInactive = $this->objParams->get('verticalInactivefontcolor');
 
-        $style[] = '.qltabs_container.vertical > .qltabs_head > {Xwidth:' . (int)$this->objParams->get('verticalWidthbuttons', 25) . '%;}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head > .qltab_head {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head > .qltab_head:last-child {border-bottom:0;}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head > .qltab_head.active {background:' . $backgroundColor . ';color:' . $fontColor . ';}';
-        $style[] = '.qltabs_container.vertical > .qltabs {Xwidth:' . (100 - (int)$this->objParams->get('verticalWidthbuttons', 25)) . '%;background:' . $backgroundColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head {/*width:' . (int)$this->objParams->get('verticalWidthbuttons', 25) . '%;*/}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > a {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head:last-child > a {border-bottom:0;}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head.active > a {background:' . $backgroundColor . ';color:' . $fontColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs {/*width:' . (100 - (int)$this->objParams->get('verticalWidthbuttons', 25)) . '%;*/background:' . $backgroundColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content {display:none;background:' . $backgroundColor . ';color:' . $fontColor . ';}';
         //$style[]='.qltabs_container.vertical.plop .qltabs .qltab_content.active {display:block;}';
         JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));

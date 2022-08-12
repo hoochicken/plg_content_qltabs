@@ -8,7 +8,7 @@
 .qltabs_container{clear:both;float:left;width:100%; margin: 10px 0;}
 
 .qltabs_container .qltabs {float:left;width:100%;}
-.qltabs_container .qltabs_head > ul {list-style-type: none;padding:0;}
+.qltabs_container .qltabs_head > ul {list-style-type: none;padding:0;margin:0;}
 .qltabs_container .qltabs_head > ul > li {margin:0;padding:0; }
 .qltabs_container .qltab_content {box-sizing: border-box;}
 .qltabs_container.horizontal .qltabs_head > ul > li {float:left; }

@@ -12,9 +12,9 @@ class clsPlgContentQltabsColor
      * @param string $strColor
      * @return array
      */
-    function html2rgb(string $strColor): array
+    function html2rgb(string $strColor = ''): array
     {
-        //strip '#' in beginning of string given
+        // strip '#' in beginning of string given
         if ('#' === $strColor[0]) {
             $strColor = substr($strColor, 1);
         }

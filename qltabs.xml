@@ -225,6 +225,84 @@
                        label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
                         />
             </fieldset>
+            <fieldset name="accordeon">
+                <field name="accordeonSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEON_DESCRIPTION"/>
+                <field name="accordeonStyle" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_STYLE_DESC"
+                       label="PLG_CONTENT_QLTABS_STYLE_LABEL"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="accordeonButtonSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEONBUTTON_DESCRIPTION"/>
+                <field name="accordeonBackgroundcolor" type="color"
+                       default="#ffffff"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                />
+                <field name="accordeonFontcolor" type="color"
+                         default="#666666"
+                         description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                         label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
+                />
+                <field name="accordeonBordercolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
+                />
+                <field name="accordeonBorderwidth" type="integer"
+                       default="1"
+                       first="0"
+                       last="20"
+                       step="1"
+                       description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
+                />
+                <field name="accordeonBordertype" type="list"
+                       default="1"
+                       description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
+                >
+                    <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
+                    <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
+                    <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
+                </field>
+                <field name="accordeonContentSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEONCONTENT_DESCRIPTION"/>
+                <field name="accordeonContentBackgroundcolor" type="color"
+                       default="#e7e7e7"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_LABEL"
+                />
+                <field name="accordeonContentFontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_LABEL"
+                />
+                <field name="accordeonContentBordercolor" type="color"
+                       default="#cdcdcd"
+                       description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
+                />
+                <field name="accordeonContentBorderwidth" type="integer"
+                       default="1"
+                       first="0"
+                       last="20"
+                       step="1"
+                       description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
+                />
+                <field name="accordeonContentBordertype" type="list"
+                       default="1"
+                       description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
+                       label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
+                >
+                    <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
+                    <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
+                    <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
+                </field>
+            </fieldset>
         </fields>
     </config>
 </extension>

@@ -62,6 +62,11 @@ class plgContentQltabs extends JPlugin
             if (1 == $this->objParams->get('verticalStyle', 0)) {
                 $this->getStylesVertical();
             }
+
+            //include vertical styles
+            if (1 == $this->objParams->get('accordeonStyle', 0)) {
+                $this->getStylesAccordeon();
+            }
         }
 
         //if no plg tag in article => ignore
@@ -288,9 +293,10 @@ class plgContentQltabs extends JPlugin
      */
     private function getStylesHorizontal()
     {
-        $numBorderWidth = $this->objParams->get('borderwidth');
-        $strBorderColor = $this->objParams->get('bordercolor');
-        $strBorderType = $this->objParams->get('bordertype');
+        $numBorderWidth = $this->objParams->get('borderwidth', '1');
+        $strBorderColor = $this->objParams->get('bordercolor', '#e5e5e5');
+        $strBorderType = $this->objParams->get('bordertype', 'solid');
+
         $strFontColor = $this->objParams->get('fontcolor');
         $strFontColorInactive = $this->objParams->get('inactivefontcolor');
         $numOpacity = $this->objParams->get('backgroundopacity');
@@ -316,9 +322,10 @@ class plgContentQltabs extends JPlugin
     private function getStylesVertical()
     {
         $style = [];
-        $borderWidth = $this->objParams->get('verticalBorderwidth');
-        $borderColor = $this->objParams->get('verticalBordercolor');
-        $borderType = $this->objParams->get('verticalBordertype');
+        $borderWidth = $this->objParams->get('verticalBorderwidth', '1');
+        $borderColor = $this->objParams->get('verticalBordercolor', '#e5e5e5');
+        $borderType = $this->objParams->get('verticalBordertype', 'solid');
+
         $fontColor = $this->objParams->get('verticalFontcolor');
         $opacity = $this->objParams->get('verticalBackgroundopacity');
         $backgroundColor = $this->getBgColor($this->objParams->get('verticalBackgroundcolor'), $opacity);
@@ -336,6 +343,33 @@ class plgContentQltabs extends JPlugin
     }
 
     /**
+     * method to get matches according to search string
+     * @internal param string $text haystack
+     * @internal param string $searchString needle, string to be searched
+     */
+    private function getStylesAccordeon()
+    {
+        $style = [];
+
+        $borderWidth = $this->objParams->get('accordeonBorderwidth', '1');
+        $borderColor = $this->objParams->get('accordeonBordercolor', '#e5e5e5');
+        $borderType = $this->objParams->get('accordeonBordertype', 'solid');
+
+        $borderContentWidth = $this->objParams->get('accordeonContentBorderwidth', '1');
+        $borderContentColor = $this->objParams->get('accordeonContentBordercolor', '#e5e5e5');
+        $borderContentType = $this->objParams->get('accordeonContentBordertype', 'solid');
+
+        $buttonFontColor = $this->objParams->get('accordeonFontcolor');
+        $buttonBackgroundColor = $this->getBgColor($this->objParams->get('accordeonBackgroundcolor'));
+        $backgroundColorContent = $this->getBgColor($this->objParams->get('accordeonContentBackgroundcolor'));
+        $fontColorContent = $this->objParams->get('accordeonContentFontcolor');
+
+        $style[] = '.qltabs_container.accordeon .qltab_head a {border-top:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $buttonBackgroundColor . ';color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.accordeon .qltab_content {display:none;background:' . $backgroundColorContent . ';color:' . $fontColorContent . ';border-top:' . $borderContentWidth . 'px ' . $borderContentType . ' ' . $borderContentColor . ';}';
+        JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));
+    }
+
+    /**
      *
      */
     private function includeScripts()
@@ -349,12 +383,13 @@ class plgContentQltabs extends JPlugin
 
     /**
      * @param $bg
-     * @param $opacity
+     * @param int $opacity
      * @return string
      */
-    private function getBgColor($bg, $opacity): string
+    private function getBgColor($bg, int $opacity = 100): string
     {
         include_once __DIR__ . '/php/clsPlgContentQltabsColor.php';
+        if (empty($bg)) $bg = '#000000';
         $objColor = new clsPlgContentQltabsColor;
         $arr = $objColor->html2rgb($bg);
         $numOpacity = $opacity / 100;

@@ -29,7 +29,7 @@
         <folder>js</folder>
     </media>
     <updateservers>
-        <server type="extension" priority="1" name="qltabs - Updates">https://raw.githubusercontent.com/hoochicken/plg_content_qltabs/master/.jupdate/plg_content_qltabs.xml</server>
+        <server type="extension" priority="1" name="qltabs - Updates">https://raw.githubusercontent.com/hoochicken/plg_content_qltabs/master/_jupdate/plg_content_qltabs.xml</server>
     </updateservers>
     <config>
         <fields name="params">

@@ -28,9 +28,9 @@
         <folder>css</folder>
         <folder>js</folder>
     </media>
-    <!--updateservers>
+    <updateservers>
         <server type="extension" priority="1" name="qltabs - Updates"><![CDATA[https://www.blackforest-software.com/_scripts/updates/plg_content_qltabs.xml]]></server>
-    </updateservers-->
+    </updateservers>
     <config>
         <fields name="params">
             <fieldset name="basic">

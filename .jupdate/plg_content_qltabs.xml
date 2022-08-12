@@ -1,0 +1,22 @@
+ <updates>
+	 <update>
+		<name>qltabs</name>
+		<client>site</client>
+		<type>plugin</type>
+		<folder>content</folder>
+		<element>qltabs</element>
+		<version>4.0.0</version>
+		<description>Content plugin for parsing text as markdown</description>
+		<infourl title="ql.de - Blackforest Software">https://ql.de</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/hoochicken/plg_content_qltabs/archive/refs/tags/release-4.0.0.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer>Dr. Mareike Riegel</maintainer>
+		<maintainerurl>http://ql.de</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="4.[0123456789]"/>
+	 </update>
+ </updates>

@@ -14,7 +14,7 @@
 .qltabs_container.plop .qltabs .qltab_content.active {display:block;}
 
 /*HORIZONTAL START*/
-.qltabs_container.horizontal .qltabs_head .qltab_head {margin-bottom:-1px;}
+.qltabs_container.horizontal .qltabs_head .qltab_head {/*margin-bottom:-1px;*/}
 .qltabs_container.horizontal .qltabs_head .qltab_head > a {background:rgb(245,245,245);cursor:pointer;float:left;padding:4px 15px;margin-right:10px;border-top-left-radius:4px;border-top-right-radius:4px;border:1px solid rgb(220,220,220);z-index:4;position:relative;}
 .qltabs_container.horizontal .qltabs_head .qltab_head.active {border-bottom-color:#fff;}
 .qltabs_container.horizontal .qltabs_head .qltab_head.active > a {background:#fff;border-bottom-color: transparent;}

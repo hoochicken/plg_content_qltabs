@@ -6,7 +6,7 @@
     <copyright>Copyright (C) 2022 ql.de All rights reserved.</copyright>
     <authorEmail>mareike.riegel@ql.de</authorEmail>
     <authorUrl>http://ql.de/</authorUrl>
-    <version>3.0.0</version>
+    <version>4.0.0</version>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <description>PLG_CONTENT_QLTABS_DESCRIPTION</description>
     <files>
@@ -18,6 +18,7 @@
         <folder plugin="qltabs">js</folder>
         <folder plugin="qltabs">language</folder>
         <folder plugin="qltabs">php</folder>
+        <folder plugin="qltabs">.jupdate</folder>
     </files>
     <languages>
         <language tag="en-GB">language/en-GB/en-GB.plg_content_qltabs.ini</language>

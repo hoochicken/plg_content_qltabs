@@ -13,6 +13,7 @@
 .qltabs_container .qltab_content {box-sizing: border-box;}
 .qltabs_container.horizontal .qltabs_head > ul > li {float:left; }
 .qltabs_container.plop .qltabs .qltab_content.active {display:block;}
+.qltabs_container .qltabs_head .qltab_head > a {text-decoration: none;}
 
 /*HORIZONTAL START*/
 .qltabs_container.horizontal .qltabs_head .qltab_head {/*margin-bottom:-1px;*/}

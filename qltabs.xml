@@ -18,7 +18,7 @@
         <folder plugin="qltabs">js</folder>
         <folder plugin="qltabs">language</folder>
         <folder plugin="qltabs">php</folder>
-        <folder plugin="qltabs">.jupdate</folder>
+        <folder plugin="qltabs">_jupdate</folder>
     </files>
     <languages>
         <language tag="en-GB">language/en-GB/en-GB.plg_content_qltabs.ini</language>
@@ -29,7 +29,7 @@
         <folder>js</folder>
     </media>
     <updateservers>
-        <server type="extension" priority="1" name="qltabs - Updates"><![CDATA[https://raw.githubusercontent.com/hoochicken/plg_content_qltabs/master/.jupdate/plg_content_qltabs.xml]]></server>
+        <server type="extension" priority="1" name="qltabs - Updates">https://raw.githubusercontent.com/hoochicken/plg_content_qltabs/master/.jupdate/plg_content_qltabs.xml</server>
     </updateservers>
     <config>
         <fields name="params">

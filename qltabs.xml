@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" version="4.0.0" group="content" method="upgrade">
+<extension type="plugin" group="content" method="upgrade">
     <name>PLG_CONTENT_QLTABS</name>
     <author>Mareike Riegel</author>
-    <creationDate>May 2022</creationDate>
+    <creationDate>2022-08-13</creationDate>
     <copyright>Copyright (C) 2022 ql.de All rights reserved.</copyright>
     <authorEmail>mareike.riegel@ql.de</authorEmail>
     <authorUrl>http://ql.de/</authorUrl>

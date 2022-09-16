@@ -14,8 +14,8 @@ defined('_JEXEC') or die ('Restricted Access');
 ?>
 <div id="qltab<?php echo $intCounter; ?>" class="qltabs_container default <?php echo $arrTabAttributes['class']; ?>"
      style="<?php echo $arrTabAttributes['style']; ?>">
-    <nav class="qltabs_head">
-        <ul role="navigation">
+    <nav class="qltabs_head" role="navigation">
+        <ul>
         <?php foreach ($arr as $k => $v) : ?>
             <li class="qltab<?php echo $intCounter; ?> qltab_head"
                 id="<?php echo $v['id']; ?>">

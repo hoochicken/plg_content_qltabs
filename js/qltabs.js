@@ -25,10 +25,10 @@ jQuery(document).ready(function () {
         elementClicked.addClass('active');
 
         // adjust tabs with content = display tab clicked on
-        let contentTabs = elementClicked.closest('.qltabs_container > .qltabs > .qltab_content');
-        contentTabs.removeClass('active').css('display', 'none');
+        let contentTabs = elementClicked.closest('.qltabs_container').children('.qltabs').children('.qltab_content');
+        contentTabs.removeClass('active').hide();
         let classs = jQuery(this).attr('id') + '_content';
-        jQuery('#' + classs).addClass('active').css('display', 'block');
+        elementClicked.closest('.qltabs_container').children('.qltabs').children('#' + classs).addClass('active').show();
         return false;
     });
 

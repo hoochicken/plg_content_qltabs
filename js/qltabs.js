@@ -10,6 +10,7 @@ jQuery(document).ready(function () {
 
     // TAB CONTENTS set first child active to be displayed
     jQuery('.qltabs_container > .qltabs').children('.qltab_content:first-child').addClass('active');
+    jQuery('.qltabs_container.default > .qltabs').children('.qltab_content:first-child').fadeIn();
     jQuery('.qltabs_container.fadein > .qltabs').children('.qltab_content:first-child').fadeIn();
     jQuery('.qltabs_container.slidedown > .qltabs').children('.qltab_content:first-child').slideDown();
     jQuery('.qltabs_container.qltabs_accordeon > .qltabs').children('.qltab_content:first-child').slideDown();
@@ -64,7 +65,7 @@ jQuery(document).ready(function () {
  */
 function qlSetActiveTabl() {
     let tabs = qlGetUrlParam('qltab');
-    if ('' == tabs) {
+    if ('' === tabs) {
         return;
     }
 

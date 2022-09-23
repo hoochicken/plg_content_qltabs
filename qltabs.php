@@ -309,6 +309,7 @@ class plgContentQltabs extends JPlugin
         $arrStyle[] = '.qltabs_container.horizontal > .qltab_content {background:' . $strBackgroundColor . ';}';
         $arrStyle[] = '.qltabs_container.horizontal > .qltabs {background:' . $strBackgroundColor . ';border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';}';
         $arrStyle[] = '.qltabs_container.horizontal > .qltabs > .qltab_content {display:none;background:' . $strBackgroundColor . ';color:' . $strFontColor . ';}';
+        $arrStyle[] = '.qltabs_container.horizontal > .qltabs > .qltab_content:first-child {display:block;}';
         //$style[]='.qltabs_container.horizontal.plop .qltabs .qltab_content.active {display:block;}';
         $strStyle = implode("\n", $arrStyle);
         JFactory::getDocument()->addStyleDeclaration($strStyle);
@@ -338,6 +339,7 @@ class plgContentQltabs extends JPlugin
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head.active > a {background:' . $backgroundColor . ';color:' . $fontColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs {/*width:' . (100 - (int)$this->objParams->get('verticalWidthbuttons', 25)) . '%;*/background:' . $backgroundColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content {display:none;background:' . $backgroundColor . ';color:' . $fontColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content:first-child {display:block;}';
         //$style[]='.qltabs_container.vertical.plop .qltabs .qltab_content.active {display:block;}';
         JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));
     }
@@ -366,6 +368,7 @@ class plgContentQltabs extends JPlugin
 
         $style[] = '.qltabs_container.accordeon .qltab_head a {border-top:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $buttonBackgroundColor . ';color:' . $buttonFontColor . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content {display:none;background:' . $backgroundColorContent . ';color:' . $fontColorContent . ';border-top:' . $borderContentWidth . 'px ' . $borderContentType . ' ' . $borderContentColor . ';}';
+        $style[] = '.qltabs_container.accordeon .qltab_content:first-child {display:block;}';
         JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));
     }
 

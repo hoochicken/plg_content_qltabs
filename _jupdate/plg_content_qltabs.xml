@@ -5,11 +5,11 @@
 		<type>plugin</type>
 		<folder>content</folder>
 		<element>qltabs</element>
-		<version>4.0.7</version>
+		<version>4.0.8</version>
 		<description>Content plugin for parsing text as markdown</description>
 		<infourl title="ql.de - Blackforest Software">https://ql.de</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/hoochicken/plg_content_qltabs/archive/refs/tags/v4.0.7.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/hoochicken/plg_content_qltabs/archive/refs/tags/v4.0.8.zip</downloadurl>
 		</downloads>
 		<tags>
 			<tag>stable</tag>

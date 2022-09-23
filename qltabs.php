@@ -243,7 +243,7 @@ class plgContentQltabs extends JPlugin
         $str = str_replace('<p>{' . $this->strCallEnd . '}', '{' . $this->strCallEnd . '}<p>', $str);
         $str = str_replace('{' . $this->strCallEnd . '}', '{' . $this->strCallEnd . '}', $str);
         $str = preg_replace('!<p>{' . $this->strCallStart . '}</p>!', '{' . $this->strCallStart . '}', $str);
-        $str = preg_replace('!<p>{' . $this->strCallStart2 . '\s([^}]*?)}</p>!', '{' . $this->strCallStart2 . '}', $str);
+        $str = preg_replace('!<p>{' . $this->strCallStart2 . '\s([^}]*?)}</p>!', '{' . $this->strCallStart2 . ' $1}', $str);
         $str = preg_replace('!<p>{' . $this->strCallStart2 . '\s([^}]*?)}!', '{' . $this->strCallStart2 . ' $1}<p>', $str);
         $str = preg_replace('!<p>{' . $this->strCallStart2 . '\s([^}]*?)}!', '{' . $this->strCallStart2 . ' $1}<p>', $str);
         $this->debugPrintText($str);

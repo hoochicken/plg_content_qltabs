@@ -6,17 +6,17 @@
  */
 jQuery(document).ready(function () {
     // TABS set first child active to be displayed
-    jQuery('.qltabs_container .qltabs_head').find('li:first').addClass('active');
+    jQuery('.qltabs_container > .qltabs_head').find('li:first').addClass('active');
 
     // TAB CONTENTS set first child active to be displayed
-    jQuery('.qltabs_container .qltabs').children('.qltab_content:first-child').addClass('active');
-    jQuery('.qltabs_container.fadein .qltabs').children('.qltab_content:first-child').fadeIn();
-    jQuery('.qltabs_container.slidedown .qltabs').children('.qltab_content:first-child').slideDown();
-    jQuery('.qltabs_container.qltabs_accordeon .qltabs').children('.qltab_content:first-child').slideDown();
+    jQuery('.qltabs_container > .qltabs').children('.qltab_content:first-child').addClass('active');
+    jQuery('.qltabs_container.fadein > .qltabs').children('.qltab_content:first-child').fadeIn();
+    jQuery('.qltabs_container.slidedown > .qltabs').children('.qltab_content:first-child').slideDown();
+    jQuery('.qltabs_container.qltabs_accordeon > .qltabs').children('.qltab_content:first-child').slideDown();
 
     qlSetActiveTabl();
 
-    jQuery('.qltabs_container.default .qltab_head').click(function (el) {
+    jQuery('.qltabs_container.default > .qltabs_head .qltab_head').click(function (el) {
         let elementClicked = jQuery(el.currentTarget);
 
         // adjust table_head
@@ -32,7 +32,7 @@ jQuery(document).ready(function () {
     });
 
     // default => just display and hide by class 'active'
-    jQuery('.qltabs_accordeon .qltab_head').click(function () {
+    jQuery('.qltabs_accordeon > .qltabs_head .qltab_head').click(function () {
         let strDisplay = jQuery(this).next('.qltab_content').css('display');
         if('block' === strDisplay) {
             jQuery(this).removeClass('active');
@@ -45,13 +45,13 @@ jQuery(document).ready(function () {
         return false;
     });
 
-    jQuery('.qltabs_container.fadein.default .qltab_head').click(function () {
+    jQuery('.qltabs_container.fadein.default > .qltabs_head .qltab_head').click(function () {
         jQuery(this).parent('div').next('div').children('div.qltab_content').css('display', 'none');
         jQuery(this).parent('div').next('div').children('div.qltab_content.active').fadeIn('slow');
         return false;
     });
 
-    jQuery('.qltabs_container.slidedown.default .qltab_head').click(function () {
+    jQuery('.qltabs_container.slidedown.default > .qltabs_head .qltab_head').click(function () {
         jQuery(this).parent('div').next('div').children('div.qltab_content').slideUp();
         jQuery(this).parent('div').next('div').children('div.qltab_content.active').slideDown();
         return false;

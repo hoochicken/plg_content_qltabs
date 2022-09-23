@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
         elementClicked.addClass('active');
 
         // adjust tabs with content = display tab clicked on
-        let contentTabs = elementClicked.closest('.qltabs_container').find('.qltab_content');
+        let contentTabs = elementClicked.closest('.qltabs_container > .qltabs > .qltab_content');
         contentTabs.removeClass('active').css('display', 'none');
         let classs = jQuery(this).attr('id') + '_content';
         jQuery('#' + classs).addClass('active').css('display', 'block');

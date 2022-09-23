@@ -65,7 +65,7 @@ jQuery(document).ready(function () {
  */
 function qlSetActiveTabl() {
     let tabs = qlGetUrlParam('qltab');
-    if ('' === tabs) {
+    if ('' === tabs || false === tabs) {
         return;
     }
 

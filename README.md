@@ -19,6 +19,11 @@ Just add the well-known style attribute as follows:
 
 The css class &quot;fadein&quot; rules the effect which is either &quot;fadein&quot;, &quot;slidedown&quot; or &quot;plop&quot;.
 
+## What about a coffee ..
+
+I love coding. My extensions are for free. Wanna say thanks? You're welcome! 
+<https://www.buymeacoffee.com/mareikeRiegel>
+
 ## Varieties
 
 ~~~txt

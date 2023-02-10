@@ -1,7 +1,7 @@
 <?php
 /**
  * @package        mod_qltabs
- * @copyright    Copyright (C) 2022 ql.de All rights reserved.
+ * @copyright    Copyright (C) 2023 ql.de All rights reserved.
  * @author        Mareike Riegel mareike.riegel@ql.de
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,6 +11,7 @@ defined('_JEXEC') or die ('Restricted Access');
 
 jimport('joomla.plugin.plugin');
 
+use Joomla\CMS\Factory;
 
 class plgContentQltabs extends JPlugin
 {
@@ -303,16 +304,21 @@ class plgContentQltabs extends JPlugin
         $strBackgroundColor = $this->getBgColor($this->objParams->get('backgroundcolor'), $numOpacity);
         $strBackgroundColorInactive = $this->getBgColor($this->objParams->get('inactivebackgroundcolor'), $numOpacity);
 
-        $arrStyle = [];
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > a {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head.active > a {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $strFontColor . '}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltab_content {background:' . $strBackgroundColor . ';}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs {background:' . $strBackgroundColor . ';border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs > .qltab_content {display:none;background:' . $strBackgroundColor . ';color:' . $strFontColor . ';}';
-        $arrStyle[] = '.qltabs_container.horizontal > .qltabs > .qltab_content:first-child {display:block;}';
-        //$style[]='.qltabs_container.horizontal.plop .qltabs .qltab_content.active {display:block;}';
-        $strStyle = implode("\n", $arrStyle);
-        JFactory::getDocument()->addStyleDeclaration($strStyle);
+        $style = [];
+        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > a {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head.active > a {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $strFontColor . '}';
+        $style[] = '.qltabs_container.horizontal > .qltab_content {background:' . $strBackgroundColor . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs {background:' . $strBackgroundColor . ';border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs > .qltab_content {display:none;background:' . $strBackgroundColor . ';color:' . $strFontColor . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs > .qltab_content:first-child {display:block;}';
+
+        $style = implode("\n", $style);
+        if ($this->isJoomla4((int)JVERSION)) {
+            $wam = Factory::getDocument()->getWebAssetManager();
+            $wam->addInlineStyle($style);
+        } else {
+            JFactory::getDocument()->addStyleDeclaration($style);
+        }
     }
 
     /**
@@ -322,7 +328,6 @@ class plgContentQltabs extends JPlugin
      */
     private function getStylesVertical()
     {
-        $style = [];
         $borderWidth = $this->objParams->get('verticalBorderwidth', '1');
         $borderColor = $this->objParams->get('verticalBordercolor', '#e5e5e5');
         $borderType = $this->objParams->get('verticalBordertype', 'solid');
@@ -333,6 +338,7 @@ class plgContentQltabs extends JPlugin
         $backgroundColorInactive = $this->getBgColor($this->objParams->get('verticalInactivebackgroundcolor'), $opacity);
         $fontColorInactive = $this->objParams->get('verticalInactivefontcolor');
 
+        $style = [];
         $style[] = '.qltabs_container.vertical > .qltabs_head {/*width:' . (int)$this->objParams->get('verticalWidthbuttons', 25) . '%;*/}';
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > a {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head:last-child > a {border-bottom:0;}';
@@ -340,8 +346,14 @@ class plgContentQltabs extends JPlugin
         $style[] = '.qltabs_container.vertical > .qltabs {/*width:' . (100 - (int)$this->objParams->get('verticalWidthbuttons', 25)) . '%;*/background:' . $backgroundColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content {display:none;background:' . $backgroundColor . ';color:' . $fontColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content:first-child {display:block;}';
-        //$style[]='.qltabs_container.vertical.plop .qltabs .qltab_content.active {display:block;}';
-        JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));
+
+        $style = implode("\n", $style);
+        if ($this->isJoomla4((int)JVERSION)) {
+            $wam = Factory::getDocument()->getWebAssetManager();
+            $wam->addInlineStyle($style);
+        } else {
+            JFactory::getDocument()->addStyleDeclaration($style);
+        }
     }
 
     /**
@@ -351,8 +363,6 @@ class plgContentQltabs extends JPlugin
      */
     private function getStylesAccordeon()
     {
-        $style = [];
-
         $borderWidth = $this->objParams->get('accordeonBorderwidth', '1');
         $borderColor = $this->objParams->get('accordeonBordercolor', '#e5e5e5');
         $borderType = $this->objParams->get('accordeonBordertype', 'solid');
@@ -366,10 +376,26 @@ class plgContentQltabs extends JPlugin
         $backgroundColorContent = $this->getBgColor($this->objParams->get('accordeonContentBackgroundcolor'));
         $fontColorContent = $this->objParams->get('accordeonContentFontcolor');
 
+        $style = [];
         $style[] = '.qltabs_container.accordeon .qltab_head a {border-top:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $buttonBackgroundColor . ';color:' . $buttonFontColor . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content {display:none;background:' . $backgroundColorContent . ';color:' . $fontColorContent . ';border-top:' . $borderContentWidth . 'px ' . $borderContentType . ' ' . $borderContentColor . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content:first-child {display:block;}';
-        JFactory::getDocument()->addStyleDeclaration(implode("\n", $style));
+
+        $style = implode("\n", $style);
+        if ($this->isJoomla4((int)JVERSION)) {
+            $wam = Factory::getDocument()->getWebAssetManager();
+            $wam->addInlineStyle($style);
+        } else {
+            JFactory::getDocument()->addStyleDeclaration($style);
+        }
+    }
+
+    /**
+     *
+     */
+    public function isJoomla4($version)
+    {
+        return 4 <= $version;
     }
 
     /**
@@ -380,8 +406,14 @@ class plgContentQltabs extends JPlugin
         if (1 == $this->objParams->get('jquery')) {
             JHtml::_('jquery.framework');
         }
-        JHtml::_('script', JUri::root() . 'media/plg_content_qltabs/js/qltabs.js');
-        JHtml::_('stylesheet', JUri::root() . 'media/plg_content_qltabs/css/qltabs.css');
+        if ($this->isJoomla4((int)JVERSION)) {
+            $wam = Factory::getDocument()->getWebAssetManager();
+            $wam->registerAndUseStyle('plg_content_qltabs', 'plg_content_qltabs/qltabs.css');
+            $wam->registerAndUseScript('plg_content_qltabs', 'plg_content_qltabs/qltabs.js');
+        } else {
+            JHtml::_('script', JUri::root() . 'media/plg_content_qltabs/js/qltabs.js');
+            JHtml::_('stylesheet', JUri::root() . 'media/plg_content_qltabs/css/qltabs.css');
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     plg_content_qltabs
- * @copyright   Copyright (C) 2022 Mareike Riegel
+ * @copyright   Copyright (C) 2023 Mareike Riegel
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;

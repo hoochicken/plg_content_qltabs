@@ -42,9 +42,27 @@ I love coding. My extensions are for free. Wanna say thanks? You're welcome!
 {qltabs id="test4" class="accordeon"}{qltab title="One"}Yes here wa go. {qltab title="Two"}Wait for it! {qltab title="Three"}Well, done :-){/qltabs}
 ~~~
 
+## display tabs already opened
+
+You can add some stuff to the add url.
+Tab ids in url as follows
+
+* http://yourlink.com/index.php/some-link?qltab=qltab0-1
+* http://yourlink.com/index.php/some-link?qltab=qltab0-2,qltab1-3
+
+How to find out id of tab:
+
+* either via firebug
+* or via sourcecode
+* or via thinking
+    * qltab0-1 means first tab cluster (1=0+1), therein the first tab (1)
+    * qltab1-3 means second tab cluster (2=1+1), therein the third tab (3)
+    * so counting of first number starts with 0, maybe I fix that someday:-)
+
 ## Line-break issue
 
-As there are still some issues on line-breaks directly after a tag, please avoid linebreaks.
+As there might still be some issues on line-breaks directly after a tag, please avoid linebreaks.
+I think I fixed it, but well ... you never know.
 
 ~~~txt
 # works

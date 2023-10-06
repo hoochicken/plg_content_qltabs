@@ -138,8 +138,8 @@
                 <field name="horizontalSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE"/>
                 <field name="fontcolorButton" type="color"
                        default="#0a58ca"
-                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
                 />
                 <field name="horizontalSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
                 <field name="inactivefontcolor" type="color"
@@ -152,6 +152,12 @@
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
+                <field name="spacerFocus" type="spacer" label="PLG_CONTENT_QLTABS_BUTTONFOCUS" />
+                <field name="backgroundcolorFocusButton" type="color"
+                       default="#ffbf00"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                />
             </fieldset>
             <fieldset name="vertical">
                 <field name="verticalSpacer" type="note" label="PLG_CONTENT_QLTABS_VERTICAL_DESCRIPTION"/>
@@ -225,8 +231,8 @@
                 <field name="verticalSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE" />
                 <field name="verticalFontcolorButton" type="color"
                        default="#0a58ca"
-                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
                 />
                 <field name="vertivalSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
                 <field name="verticalInactivefontcolor" type="color"
@@ -239,6 +245,12 @@
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
+                <field name="verticalSpacerFocus" type="spacer" label="PLG_CONTENT_QLTABS_BUTTONFOCUS" />
+                <field name="verticalBackgroundcolorFocusButton" type="color"
+                       default="#ffbf00"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                />
             </fieldset>
             <fieldset name="accordeon">
                 <field name="accordeonSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEON_DESCRIPTION"/>
@@ -327,14 +339,20 @@
                 <field name="accordeonSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE" />
                 <field name="accordeonFontcolorButton" type="color"
                        default="#0a58ca"
-                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
                 />
                 <field name="accordeonSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
                 <field name="accordeonFontcolorInactiveButton" type="color"
                        default="#0a58ca"
-                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
+                />
+                <field name="accordeonSpacerFocus" type="spacer" label="PLG_CONTENT_QLTABS_BUTTONFOCUS" />
+                <field name="accordeonBackgroundcolorFocusButton" type="color"
+                       default="#ffbf00"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
                 />
             </fieldset>
         </fields>

@@ -20,7 +20,7 @@ defined('_JEXEC') or die ('Restricted Access');
         <ul>
         <?php foreach ($arr as $k => $v) : ?>
             <li class="qltab<?= $intCounter; ?> qltab_head" id="<?= $v['id']; ?>" aria-label="<?= $v['title']; ?>">
-                <span role="button"><?= $v['title']; ?></span>
+                <a href="#" class="inner" role="button"><?= $v['title']; ?></a>
             </li>
         <?php endforeach; ?>
         </ul>

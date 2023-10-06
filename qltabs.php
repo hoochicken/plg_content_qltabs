@@ -269,10 +269,12 @@ class plgContentQltabs extends JPlugin
         $strBackgroundColor = $this->getBgColor($this->objParams->get('backgroundcolor'), $numOpacity);
         $strBackgroundColorInactive = $this->getBgColor($this->objParams->get('inactivebackgroundcolor'), $numOpacity);
         $buttonFontColor = $this->objParams->get('fontcolorButton');
+        $bgFocus = $this->objParams->get('verticalBackgroundcolorFocusButton');
 
         $style = [];
-        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > span {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
-        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head.active > span {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $buttonFontColor . '}';
+        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > .inner {margin-bottom:-' . $numBorderWidth . 'px;border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';background:' . $strBackgroundColorInactive . ';color:' . $strFontColorInactive . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs_head .section.active .qltab_head > .inner {border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';border-bottom:' . $numBorderWidth . 'px solid ' . $strBackgroundColor . ';background:' . $strBackgroundColor . ';color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.horizontal > .qltabs_head .qltab_head > .inner:focus {background:' . $bgFocus . ';}';
         $style[] = '.qltabs_container.horizontal > .qltab_content {background:' . $strBackgroundColor . ';}';
         $style[] = '.qltabs_container.horizontal > .qltabs {background:' . $strBackgroundColor . ';border:' . $numBorderWidth . 'px ' . $strBorderType . ' ' . $strBorderColor . ';}';
         $style[] = '.qltabs_container.horizontal > .qltabs > .qltab_content {display:none;background:' . $strBackgroundColor . ';color:' . $strFontColor . ';}';
@@ -304,12 +306,14 @@ class plgContentQltabs extends JPlugin
         $backgroundColorInactive = $this->getBgColor($this->objParams->get('verticalInactivebackgroundcolor'), $opacity);
         $fontColorInactive = $this->objParams->get('verticalInactivefontcolor');
         $buttonFontColor = $this->objParams->get('verticalFontcolorButton');
+        $bgFocus = $this->objParams->get('verticalBackgroundcolorFocusButton');
 
         $style = [];
         $style[] = '.qltabs_container.vertical > .qltabs_head {}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > span {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head:last-child > span {border-bottom:0;}';
-        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head.active > span {background:' . $backgroundColor . ';color:' . $fontColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > .inner {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head:last-child > .inner {border-bottom:0;}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .section.active .qltab_head > .inner {background:' . $backgroundColor . ';color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > .inner:focus {background:' . $bgFocus . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs {background:' . $backgroundColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content {display:none;background:' . $backgroundColor . ';color:' . $fontColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content:first-child {display:block;}';
@@ -343,10 +347,12 @@ class plgContentQltabs extends JPlugin
         $backgroundColorContent = $this->getBgColor($this->objParams->get('accordeonContentBackgroundcolor'));
         $fontColorContent = $this->objParams->get('accordeonContentFontcolor');
         $fontColorInactive = $this->objParams->get('accordeonFontcolorInactiveButton');
+        $bgFocus = $this->objParams->get('accordeonBackgroundcolorFocusButton');
 
         $style = [];
-        $style[] = '.qltabs_container.accordeon .qltab_head span {border-top:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $buttonBackgroundColor . ';color:' . $fontColorInactive . ';}';
-        $style[] = '.qltabs_container.accordeon .qltab_head.active span {color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.accordeon .qltab_head .inner {border-top:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $buttonBackgroundColor . ';color:' . $fontColorInactive . ';}';
+        $style[] = '.qltabs_container.accordeon .section.active > .qltab_head > .inner {color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.accordeon .qltab_head > .inner:focus {background-color:' . $bgFocus . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content {display:none;background:' . $backgroundColorContent . ';color:' . $fontColorContent . ';border-top:' . $borderContentWidth . 'px ' . $borderContentType . ' ' . $borderContentColor . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content:first-child {display:block;}';
 

@@ -19,8 +19,8 @@ defined('_JEXEC') or die ('Restricted Access');
     <nav class="qltabs_head" role="navigation">
         <ul>
         <?php foreach ($arr as $k => $v) : ?>
-            <li class="qltab<?= $intCounter; ?> qltab_head" id="<?= $v['id']; ?>" aria-label="<?= $v['title']; ?>">
-                <a href="#" class="inner" role="button"><?= $v['title']; ?></a>
+            <li class="qltab<?= $intCounter; ?> qltab_head" id="<?= $v['id']; ?>">
+                <a href="#" class="inner" role="button" aria-label="<?= $v['title']; ?>"><?= $v['title']; ?></a>
             </li>
         <?php endforeach; ?>
         </ul>

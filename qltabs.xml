@@ -95,29 +95,21 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="backgroundcolor" type="color"
-                       default="#ffffff"
-                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
-                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
-                        />
-                <field name="backgroundopacity" type="integer"
-                       default="100"
-                       step="1"
-                       first="0"
-                       last="100"
-                       description="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_DESC"
-                       label="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_LABEL"
-                        />
                 <field name="fontcolor" type="color"
                        default="#666666"
                        description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
-                        />
+                />
+                <field name="backgroundcolor" type="color"
+                       default="#ffffff"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
+                />
                 <field name="bordercolor" type="color"
                        default="#cdcdcd"
                        description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
-                        />
+                />
                 <field name="borderwidth" type="integer"
                        default="1"
                        first="0"
@@ -125,25 +117,40 @@
                        step="1"
                        description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
-                        />
+                />
                 <field name="bordertype" type="list"
                        default="1"
                        description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
-                        >
+                >
                     <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
                     <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
-                <field name="inactivebackgroundcolor" type="color"
-                       default="#e7e7e7"
-                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
-                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
-                        />
+                <field name="backgroundopacity" type="integer"
+                       default="100"
+                       step="1"
+                       first="0"
+                       last="100"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_LABEL"
+                />
+                <field name="horizontalSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE"/>
+                <field name="fontcolorButton" type="color"
+                       default="#0a58ca"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                />
+                <field name="horizontalSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
                 <field name="inactivefontcolor" type="color"
                        default="#666666"
                        description="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
+                />
+                <field name="inactivebackgroundcolor" type="color"
+                       default="#e7e7e7"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
             </fieldset>
             <fieldset name="vertical">
@@ -157,6 +164,11 @@
                     <option value="fadein">PLG_CONTENT_QLTABS_FADEIN</option>
                     <option value="slidedown">PLG_CONTENT_QLTABS_SLIDEDOWN</option>
                 </field>
+                <field name="verticalFontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
+                />
                 <field name="verticalWidthbuttons" type="integer"
                        default="25"
                        label="PLG_CONTENT_QLTABS_WIDTHBUTTONS_LABEL"
@@ -179,7 +191,7 @@
                        default="#ffffff"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
-                        />
+                />
                 <field name="verticalBackgroundopacity" type="integer"
                        default="100"
                        step="1"
@@ -187,17 +199,12 @@
                        last="100"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDOPACITY_LABEL"
-                        />
-                <field name="verticalFontcolor" type="color"
-                       default="#666666"
-                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
-                        />
+                />
                 <field name="verticalBordercolor" type="color"
                        default="#cdcdcd"
                        description="PLG_CONTENT_QLTABS_BORDERCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERCOLOR_LABEL"
-                        />
+                />
                 <field name="verticalBorderwidth" type="integer"
                        default="1"
                        first="0"
@@ -205,38 +212,36 @@
                        step="1"
                        description="PLG_CONTENT_QLTABS_BORDERWIDTH_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERWIDTH_LABEL"
-                        />
+                />
                 <field name="verticalBordertype" type="list"
                        default="1"
                        description="PLG_CONTENT_QLTABS_BORDERTYPE_DESC"
                        label="PLG_CONTENT_QLTABS_BORDERTYPE_LABEL"
-                        >
+                >
                     <option value="solid">PLG_CONTENT_QLTABS_BORDERTYPE_SOLID</option>
                     <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
+                <field name="verticalSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE" />
+                <field name="verticalFontcolorButton" type="color"
+                       default="#0a58ca"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                />
+                <field name="vertivalSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
+                <field name="verticalInactivefontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
+                />
                 <field name="verticalInactivebackgroundcolor" type="color"
                        default="#e7e7e7"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLORINACTIVE_LABEL"
                         />
-                <field name="verticalInactivefontcolor" type="color"
-                       default="#666666"
-                       description="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLORINACTIVE_LABEL"
-                        />
             </fieldset>
             <fieldset name="accordeon">
                 <field name="accordeonSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEON_DESCRIPTION"/>
-                <field name="accordeonStyle" type="radio"
-                       class="btn-group"
-                       default="0"
-                       description="PLG_CONTENT_QLTABS_STYLE_DESC"
-                       label="PLG_CONTENT_QLTABS_STYLE_LABEL"
-                >
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
                 <field name="accordeonSingleton" type="radio"
                        class="btn-group"
                        default="0"
@@ -246,16 +251,19 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="accordeonButtonSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEONBUTTON_DESCRIPTION"/>
+                <field name="accordeonStyle" type="radio"
+                       class="btn-group"
+                       default="0"
+                       description="PLG_CONTENT_QLTABS_STYLE_DESC"
+                       label="PLG_CONTENT_QLTABS_STYLE_LABEL"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
                 <field name="accordeonBackgroundcolor" type="color"
                        default="#ffffff"
                        description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_DESC"
                        label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_LABEL"
-                />
-                <field name="accordeonFontcolor" type="color"
-                         default="#666666"
-                         description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
-                         label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
                 />
                 <field name="accordeonBordercolor" type="color"
                        default="#cdcdcd"
@@ -279,16 +287,10 @@
                     <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
-                <field name="accordeonContentSpacer" type="note" label="PLG_CONTENT_QLTABS_ACCORDEONCONTENT_DESCRIPTION"/>
-                <field name="accordeonContentBackgroundcolor" type="color"
-                       default="#e7e7e7"
-                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_DESC"
-                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_LABEL"
-                />
-                <field name="accordeonContentFontcolor" type="color"
+                <field name="accordeonFontcolor" type="color"
                        default="#666666"
-                       description="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_DESC"
-                       label="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_LABEL"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_LABEL"
                 />
                 <field name="accordeonContentBordercolor" type="color"
                        default="#cdcdcd"
@@ -312,6 +314,28 @@
                     <option value="dotted">PLG_CONTENT_QLTABS_BORDERTYPE_DOTTED</option>
                     <option value="dashed">PLG_CONTENT_QLTABS_BORDERTYPE_DASHED</option>
                 </field>
+                <field name="accordeonContentBackgroundcolor" type="color"
+                       default="#e7e7e7"
+                       description="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_DESC"
+                       label="PLG_CONTENT_QLTABS_BACKGROUNDCOLOR_CONTENT_LABEL"
+                />
+                <field name="accordeonContentFontcolor" type="color"
+                       default="#666666"
+                       description="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLOR_CONTENT_LABEL"
+                />
+                <field name="accordeonSpacerActive" type="spacer" label="PLG_CONTENT_QLTABS_ACTIVE" />
+                <field name="accordeonFontcolorButton" type="color"
+                       default="#0a58ca"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                />
+                <field name="accordeonSpacerInactive" type="spacer" label="PLG_CONTENT_QLTABS_INACTIVE" />
+                <field name="accordeonFontcolorInactiveButton" type="color"
+                       default="#0a58ca"
+                       description="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_DESC"
+                       label="PLG_CONTENT_QLTABS_FONTCOLORBUTTON_LABEL"
+                />
             </fieldset>
         </fields>
     </config>

@@ -9,24 +9,26 @@
 //no direct access
 defined('_JEXEC') or die ('Restricted Access');
 /** @var int $intCounter */
-/** @var array $arrTabAttributes */
+/** @var array $tabAttributes */
 /** @var array $arr */
+/** @var array $attributes */
+/** @var \Joomla\Registry\Registry $params */
 ?>
-<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container default <?php echo $arrTabAttributes['class']; ?>"
-     style="<?php echo $arrTabAttributes['style']; ?>">
+<div id="qltab<?= $intCounter; ?>" class="qltabs_container default <?= $tabAttributes['class']; ?>"
+     style="<?= $tabAttributes['style']; ?>">
     <nav class="qltabs_head" role="navigation">
         <ul>
         <?php foreach ($arr as $k => $v) : ?>
-            <li class="qltab<?php echo $intCounter; ?> qltab_head"
-                id="<?php echo $v['id']; ?>">
-                <a href="#" role="button" tabindex="0"><?php echo $v['title']; ?></a></li>
+            <li class="qltab<?= $intCounter; ?> qltab_head" id="<?= $v['id']; ?>" aria-label="<?= $v['title']; ?>">
+                <span role="button"><?= $v['title']; ?></span>
+            </li>
         <?php endforeach; ?>
         </ul>
     </nav>
     <div class="qltabs">
         <?php foreach ($arr as $k => $v) : ?>
-            <div class="qltab_content" id="<?php echo $v['id']; ?>_content">
-                <?php echo $v['content']; ?>
+            <div class="qltab_content" id="<?= $v['id']; ?>_content">
+                <?= $v['content']; ?>
             </div>
         <?php endforeach; ?>
     </div>

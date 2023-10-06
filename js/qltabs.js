@@ -32,17 +32,29 @@ jQuery(document).ready(function () {
     return false;
   });
 
-  jQuery('.qltabs_accordeon .qltab_head').click(function () {
-    jQuery('.qltabs_accordeon.singleton').find('.qltab_content').removeClass('active').slideUp();
+  jQuery('.qltabs_accordeon.multiton .qltab_head').click(function () {
     let display = jQuery(this).next('.qltab_content').css('display');
     if ('block' === display) {
-      jQuery(this).removeClass('active');
-      jQuery(this).next('.qltab_content').removeClass('active');
+      jQuery(this).next('.qltab_content').slideUp();
+      jQuery(this).closest('.section').removeClass('active');
     } else {
-      jQuery(this).addClass('active');
-      jQuery(this).next('.qltab_content').addClass('active');
+      jQuery(this).next('.qltab_content').slideDown();
+      jQuery(this).closest('.section').addClass('active');
     }
-    jQuery(this).next('.qltab_content').slideToggle();
+    return false;
+  });
+
+  jQuery('.qltabs_accordeon.singleton .qltab_head').click(function () {
+    let display = jQuery(this).next('.qltab_content').css('display');
+    jQuery(this).closest('.qltabs_accordeon.singleton').find('.section').removeClass('active');
+    jQuery(this).closest('.qltabs_accordeon').find('.qltab_content').slideUp();
+    if ('block' === display) {
+      jQuery(this).next('.qltab_content').slideUp();
+      jQuery(this).closest('.section').removeClass('active');
+    } else {
+      jQuery(this).next('.qltab_content').slideDown();
+      jQuery(this).closest('.section').addClass('active');
+    }
     return false;
   });
 

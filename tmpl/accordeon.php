@@ -9,16 +9,17 @@
 //no direct access
 defined('_JEXEC') or die ('Restricted Access');
 /** @var int $intCounter */
-/** @var array $arrTabAttributes */
+/** @var array $tabAttributes */
+/** @var array $attributes */
 /** @var array $arr */
-/** @var \Joomla\Registry\Registry $objParams */
+/** @var \Joomla\Registry\Registry $params */
 ?>
-<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon <?= $arrTabAttributes['class']; ?> <?= $objParams->get('accordeonSingleton', 0) ? 'singleton' : ''; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
+<div id="qltab<?= $intCounter; ?>" class="qltabs_container qltabs_accordeon <?= $tabAttributes['class']; ?> <?= $params->get('accordeonSingleton', 0) ? 'singleton' : 'multiton'; ?>" style="<?= $tabAttributes['style']; ?>">
     <?php foreach ($arr as $k => $v) : ?>
         <div class="section">
-            <div role="button" tabindex="0" class="qltab<?php echo $intCounter; ?> qltab_head" id="<?php echo $v['id']; ?>"><a href="#"><?php echo $v['title']; ?></a></div>
-            <div tabindex="-1" class="qltab_content" id="<?php echo $v['id']; ?>_content">
-                <?php echo $v['content']; ?>
+            <div role="button" aria-label="" tabindex="0" class="qltab<?= $intCounter; ?> qltab_head" id="<?= $v['id']; ?>"><span><?= $v['title']; ?></span></div>
+            <div tabindex="-1" class="qltab_content" id="<?= $v['id']; ?>_content">
+                <?= $v['content']; ?>
             </div>
         </div>
     <?php endforeach; ?>

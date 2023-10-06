@@ -21,30 +21,31 @@ class plgContentQltabs extends JPlugin
     protected string $strCallEnd = '/qltabs';
     protected array $arrStates = [];
     protected array $arrTabAttributes = [];
-    public $objParams;
+    public Joomla\Registry\Registry $objParams;
     private array $arrReplace = [];
-    private bool $boolDebug = false;
+    private bool $debug = false;
     private array $arrAttributes = [];
+    private const ATTRIBUTES = ['class' => '', 'style' => '', 'id' => '', 'type' => '', 'accordeonSingleton' => '',];
 
     /**
      * onContentPrepare :: some kind of controller of plugin
-     * @param string $strContext
+     * @param string $content
      * @param $objArticle
      * @param $objParams
      * @param ?int $numPage
      * @return bool|void
      * @throws Exception
      */
-    public function onContentPrepare(string $strContext, &$objArticle, &$objParams, ?int $numPage = 0)
+    public function onContentPrepare(string $content, &$objArticle, &$objParams, ?int $numPage = 0)
     {
         //if search => ignore
-        if ('com_finder.indexer' === $strContext) {
+        if ('com_finder.indexer' === $content) {
             return true;
         }
         $this->objParams = $this->params;
 
-        $input = JFactory::getApplication()->input;
-        $this->boolDebug = $input->getBool('ql_content_debug', false);
+        $input = Factory::getApplication()->input;
+        $this->debug = $input->getBool('ql_content_debug', false);
 
         // check session if styles already loaded
         $boolAlreadyLoadedStyles = defined('qltabs_styles');
@@ -55,17 +56,17 @@ class plgContentQltabs extends JPlugin
                 define('qltabs_styles', true);
             }
             //include scripts
-            if (1 == $this->objParams->get('style', 0)) {
+            if ($this->objParams->get('style', 0)) {
                 $this->getStylesHorizontal();
             }
 
             //include vertical styles
-            if (1 == $this->objParams->get('verticalStyle', 0)) {
+            if ($this->objParams->get('verticalStyle', 0)) {
                 $this->getStylesVertical();
             }
 
             //include vertical styles
-            if (1 == $this->objParams->get('accordeonStyle', 0)) {
+            if ($this->objParams->get('accordeonStyle', 0)) {
                 $this->getStylesAccordeon();
             }
         }
@@ -129,9 +130,9 @@ class plgContentQltabs extends JPlugin
         $strRegex = '~{' . $this->strCallStart . '(.*?)}~s';
         preg_match($strRegex, $string, $arrMatches);
         if (isset($arrMatches[1])) {
-            $this->getTagAttributes($intCounter, $arrMatches[1]);
+            $this->initTagAttributes($intCounter, $arrMatches[1]);
         } else {
-            $this->getTagAttributes($intCounter);
+            $this->initTagAttributes($intCounter);
         }
         $strRegex = '~{' . $this->strCallStart2 . ' title?=?"(.+?)"}(.+?)(?={(' . $this->strCallStart2 . '|' . $this->strCallEnd . '))~s';
         preg_match_all($strRegex, $string, $arrMatches);
@@ -156,36 +157,34 @@ class plgContentQltabs extends JPlugin
      * @param int $intCounter
      * @param string $string
      */
-    private function getTagAttributes(int $intCounter, string $string = '')
+    private function initTagAttributes(int $intCounter, string $string = '')
     {
-        //set default values
-        $arrValue = ['class' => '', 'style' => '', 'id' => '', 'type' => '',];
+        // set default values
+        $value = static::ATTRIBUTES;
 
         $arr = ['class', 'id', 'style', 'type', 'title',];
         $strRegex = '/(' . implode('|', $arr) . ')="(.*?)"/';
         preg_match_all($strRegex, $string, $arrMatches);
         foreach ($arrMatches[1] as $k => $v) {
-            $arrValue[$v] = trim($arrMatches[2][$k]);
+            $value[$v] = trim($arrMatches[2][$k]);
         }
-        if (false === strpos($arrValue['class'], 'horizontal') && false === strpos($arrValue['class'], 'vertical')) {
-            $arrValue['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
+        if (false === strpos($value['class'], 'horizontal') && false === strpos($value['class'], 'vertical')) {
+            $value['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
         }
         if (false && 'vertical' === $this->objParams->get('defaultType', 'horizontal')) {
             $numDefaultWidth = (int)$this->objParams->get('verticalWidthbuttons', 25);
-            if (!preg_match('/width([0-9]{1,2})/i', $arrValue['class'], $match)) {
-                $arrValue['class'] .= ' qltabsWidth' . $numDefaultWidth;
+            if (!preg_match('/width([0-9]{1,2})/i', $value['class'], $match)) {
+                $value['class'] .= ' qltabsWidth' . $numDefaultWidth;
             }
         }
-        if (0 == preg_match('/(plop|fadein|slidedown)/', $arrValue['class'])) {
-            if (false !== strpos($arrValue['class'], 'horizontal')) {
-                $arrValue['class'] .= ' ' . $this->objParams->get('displayEffect', 'plop');
-            } elseif (false !== strpos($arrValue['class'], 'vertical')) {
-                $arrValue['class'] .= ' ' . $this->objParams->get('verticalDisplayEffect', 'plop');
+        if (!preg_match('/(plop|fadein|slidedown)/', $value['class'])) {
+            if (false !== strpos($value['class'], 'horizontal')) {
+                $value['class'] .= ' ' . $this->objParams->get('displayEffect', 'plop');
+            } elseif (false !== strpos($value['class'], 'vertical')) {
+                $value['class'] .= ' ' . $this->objParams->get('verticalDisplayEffect', 'plop');
             }
         }
-        //print_r($arrValue);die;
-        $this->arrTabAttributes[$intCounter] = $arrValue;
-        return;
+        $this->arrTabAttributes[$intCounter] = $value;
     }
 
     /**
@@ -194,45 +193,11 @@ class plgContentQltabs extends JPlugin
      */
     private function getMatches($string): array
     {
-        //get matches to {qltabs}
+        // get matches to {qltabs}
         $strRegex = '~{' . $this->strCallStart . '(.*?)}(.+?){' . $this->strCallEnd . '}~s';
         preg_match_all($strRegex, $string, $arrMatches);
         return $arrMatches;
     }
-
-    /**
-     * method to get attributes
-     * @param string $string
-     * @return array
-     */
-    private function getAttributes(string $string): array
-    {
-        $strSelector = implode('|', $this->arrAttributes);
-        preg_match_all('~(' . $strSelector . ')="(.+?)"~s', $string, $arrMatches);
-        $arrAttributes = [];
-        if (is_array($arrMatches)) {
-            foreach ($arrMatches[0] as $k => $v) {
-                if (isset($arrMatches[1][$k]) && isset($arrMatches[2][$k])) {
-                    $arrAttributes[$arrMatches[1][$k]] = $arrMatches[2][$k];
-                }
-            }
-        }
-        return $arrAttributes;
-    }
-
-    /**
-     * @param string $strStart
-     * @param string $strEnd
-     * @param string $strHaystack
-     * @return array
-     */
-    private function getMatchesInString(string $strStart, string $strEnd, string $strHaystack): array
-    {
-        $needle = '~{' . $strStart . '(.*?)' . $strEnd . '}~s';
-        preg_match_all($needle, $strHaystack, $arrMatches);
-        return $arrMatches;
-    }
-
 
     /**
      * method to clear tags
@@ -258,7 +223,7 @@ class plgContentQltabs extends JPlugin
      */
     private function debugPrintText($str)
     {
-        if (!$this->boolDebug) {
+        if (!$this->debug) {
             return;
         }
         echo '<pre>' . htmlspecialchars($str) . '</pre>';
@@ -282,9 +247,9 @@ class plgContentQltabs extends JPlugin
         }
         $strPathLayout = JPluginHelper::getLayoutPath('content', 'qltabs', $strLayoutFile);
         include $strPathLayout;
-        $strHtml = ob_get_contents();
+        $html = ob_get_contents();
         ob_end_clean();
-        return $strHtml;
+        return $html;
     }
 
     /**

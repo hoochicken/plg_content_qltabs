@@ -11,8 +11,9 @@ defined('_JEXEC') or die ('Restricted Access');
 /** @var int $intCounter */
 /** @var array $arrTabAttributes */
 /** @var array $arr */
+/** @var \Joomla\Registry\Registry $objParams */
 ?>
-<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon <?php echo $arrTabAttributes['class']; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
+<div id="qltab<?php echo $intCounter; ?>" class="qltabs_container qltabs_accordeon <?= $arrTabAttributes['class']; ?> <?= $objParams->get('accordeonSingleton', 0) ? 'singleton' : ''; ?>" style="<?php echo $arrTabAttributes['style']; ?>">
     <?php foreach ($arr as $k => $v) : ?>
         <div class="section">
             <div role="button" tabindex="0" class="qltab<?php echo $intCounter; ?> qltab_head" id="<?php echo $v['id']; ?>"><a href="#"><?php echo $v['title']; ?></a></div>

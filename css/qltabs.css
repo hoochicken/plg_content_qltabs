@@ -1,11 +1,12 @@
 /**
  * @package		plg_content_qltabs
  * @copyright	Copyright (C) 2023 ql.de All rights reserved.
- * @author 		Mareike Riegel mareike.riegel@ql.de
+ * @author 		Mareike Riegel info@ql.de
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 .qltabs_container{clear:both;float:left;width:100%; margin: 10px 0;}
+
 .qltabs_container .qltabs {float:left;width:100%;}
 .qltabs_container .qltabs_head > ul {list-style-type: none;padding:0;margin:0;}
 .qltabs_container .qltabs_head > ul > li {margin:0;padding:0; }
@@ -14,16 +15,16 @@
 .qltabs_container.plop .qltabs .qltab_content.active {display:block;}
 .qltabs_container .qltabs_head .qltab_head > a {text-decoration: none;}
 
-/*HORIZONTAL START*/
-.qltabs_container.horizontal > .qltabs_head .qltab_head {/*margin-bottom:-1px;*/}
+/* HORIZONTAL START */
+.qltabs_container.horizontal > .qltabs_head .qltab_head {/* margin-bottom:-1px; */}
 .qltabs_container.horizontal > .qltabs_head .qltab_head > a {background:rgb(245,245,245);cursor:pointer;float:left;padding:4px 15px;margin-right:10px;border-top-left-radius:4px;border-top-right-radius:4px;border:1px solid rgb(220,220,220);z-index:4;position:relative;}
 .qltabs_container.horizontal > .qltabs_head .qltab_head.active {border-bottom-color:#fff;}
 .qltabs_container.horizontal > .qltabs_head .qltab_head.active > a {background:#fff;border-bottom-color: transparent;}
 .qltabs_container.horizontal > .qltabs {clear:both;}
 .qltabs_container.horizontal > .qltabs > .qltab_content {padding:15px;display:none;float:left;width:100%;}
-/*HORIZONTAL STOP*/
+/* HORIZONTAL STOP */
 
-/*VERTICAL START*/
+/* VERTICAL START */
 .qltabs_container.vertical > .qltabs_head {float:left;box-sizing:border-box;width:25%;}
 .qltabs_container.vertical > .qltabs_head .qltab_head > a {background:rgb(245,245,245);display:block;box-sizing:border-box;width:100%;cursor:pointer;float:left;padding:15px;border-bottom:1px solid rgb(220,220,220);}
 .qltabs_container.vertical > .qltabs_head .qltab_head > a.active {background:transparent; }
@@ -32,14 +33,14 @@
 .qltabs_container.vertical > .qltabs_head .qltab_head.active > a {background:transparent;}
 .qltabs_container.vertical > .qltabs > .qltab_content {padding:15px;display:none;}
 .qltabs_container.vertical > .qltabs > .qltab_content.active {padding:15px;display:block;}
-/*VERTICAL STOP*/
+/* VERTICAL STOP */
 
-/*ACCORDEON START*/
+/* ACCORDEON START */
 .qltabs_container.qltabs_accordeon {float:left;width:100%;box-sizing:border-box;}
 .qltabs_container.qltabs_accordeon .qltab_head > a {padding:15px; cursor:pointer;float:left;width:100%;box-sizing:border-box;}
 .qltabs_container.qltabs_accordeon > .section:first-child > .qltab_head > a {border-top:0;}
 .qltabs_container.qltabs_accordeon .qltab_content {padding:15px;float:left;clear:both;display:none;width:100%;box-sizing:border-box;}
-/*ACCORDEON STOP*/
+/* ACCORDEON STOP */
 
 .qltabs_container.vertical.qlwidth0 .qltabs_head{width:0%;}
 .qltabs_container.vertical.qlwidth0 .qltabs{width:100%;}
@@ -248,5 +249,5 @@
 {
     .qltabs_container.vertical[class*='width'] .qltabs_head,.qltabs_container.vertical[class*='width'] .qltabs{clear:both;width:100%;}
     .qltabs_head {box-sizing:border-box;width:100%;}
-    .qltabs_head .qltab_head{/*clear:both;*/box-sizing:border-box;width:100%;}
+    .qltabs_head .qltab_head{clear:both;box-sizing:border-box;width:100%;}
 }

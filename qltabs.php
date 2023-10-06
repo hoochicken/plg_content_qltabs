@@ -171,7 +171,7 @@ class plgContentQltabs extends JPlugin
         if (false === strpos($value['class'], 'horizontal') && false === strpos($value['class'], 'vertical')) {
             $value['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
         }
-        if (false && 'vertical' === $this->objParams->get('defaultType', 'horizontal')) {
+        if ('vertical' === $this->objParams->get('defaultType', 'horizontal')) {
             $numDefaultWidth = (int)$this->objParams->get('verticalWidthbuttons', 25);
             if (!preg_match('/width([0-9]{1,2})/i', $value['class'], $match)) {
                 $value['class'] .= ' qltabsWidth' . $numDefaultWidth;

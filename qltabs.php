@@ -12,8 +12,13 @@ defined('_JEXEC') or die ('Restricted Access');
 jimport('joomla.plugin.plugin');
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\Component\Finder\Administrator\Indexer\Parser\Html;
 
-class plgContentQltabs extends JPlugin
+class plgContentQltabs extends CMSPlugin
 {
 
     protected string $strCallStart = 'qltabs';
@@ -245,7 +250,7 @@ class plgContentQltabs extends JPlugin
         } else {
             $strLayoutFile = 'default';
         }
-        $strPathLayout = JPluginHelper::getLayoutPath('content', 'qltabs', $strLayoutFile);
+        $strPathLayout = PluginHelper::getLayoutPath('content', 'qltabs', $strLayoutFile);
         include $strPathLayout;
         $html = ob_get_contents();
         ob_end_clean();
@@ -281,12 +286,9 @@ class plgContentQltabs extends JPlugin
         $style[] = '.qltabs_container.horizontal > .qltabs > .qltab_content:first-child {display:block;}';
 
         $style = implode("\n", $style);
-        if ($this->isJoomla4((int)JVERSION)) {
-            $wam = Factory::getDocument()->getWebAssetManager();
-            $wam->addInlineStyle($style);
-        } else {
-            JFactory::getDocument()->addStyleDeclaration($style);
-        }
+        /** @var \Joomla\CMS\WebAsset\WebAssetManager $wam */
+        $wam = Factory::getApplication()->getDocument()->getWebAssetManager();
+        $wam->addInlineStyle($style, ['name' => 'plg_content_qltabs.horizontal']);
     }
 
     /**
@@ -319,12 +321,8 @@ class plgContentQltabs extends JPlugin
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content:first-child {display:block;}';
 
         $style = implode("\n", $style);
-        if ($this->isJoomla4((int)JVERSION)) {
-            $wam = Factory::getDocument()->getWebAssetManager();
-            $wam->addInlineStyle($style);
-        } else {
-            JFactory::getDocument()->addStyleDeclaration($style);
-        }
+        $wam = Factory::getApplication()->getDocument()->getWebAssetManager();
+        $wam->addInlineStyle($style, ['name' => 'plg_content_qltabs.vertical']);
     }
 
     /**
@@ -355,22 +353,10 @@ class plgContentQltabs extends JPlugin
         $style[] = '.qltabs_container.accordeon .qltab_head > .inner:focus {background-color:' . $bgFocus . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content {display:none;background:' . $backgroundColorContent . ';color:' . $fontColorContent . ';border-top:' . $borderContentWidth . 'px ' . $borderContentType . ' ' . $borderContentColor . ';}';
         $style[] = '.qltabs_container.accordeon .qltab_content:first-child {display:block;}';
-
         $style = implode("\n", $style);
-        if ($this->isJoomla4((int)JVERSION)) {
-            $wam = Factory::getDocument()->getWebAssetManager();
-            $wam->addInlineStyle($style);
-        } else {
-            JFactory::getDocument()->addStyleDeclaration($style);
-        }
-    }
 
-    /**
-     *
-     */
-    public function isJoomla4($version)
-    {
-        return 4 <= $version;
+        $wam = Factory::getApplication()->getDocument()->getWebAssetManager();
+        $wam->addInlineStyle($style, ['name' => 'plg_content_qltabs.accordeon']);
     }
 
     /**
@@ -378,17 +364,12 @@ class plgContentQltabs extends JPlugin
      */
     private function includeScripts()
     {
-        if (1 == $this->objParams->get('jquery')) {
-            JHtml::_('jquery.framework');
+        if ($this->objParams->get('jquery')) {
+            HTMLHelper::_('jquery.framework');
         }
-        if ($this->isJoomla4((int)JVERSION)) {
-            $wam = Factory::getDocument()->getWebAssetManager();
-            $wam->registerAndUseStyle('plg_content_qltabs', 'plg_content_qltabs/qltabs.css');
-            $wam->registerAndUseScript('plg_content_qltabs', 'plg_content_qltabs/qltabs.js');
-        } else {
-            JHtml::_('script', JUri::root() . 'media/plg_content_qltabs/js/qltabs.js');
-            JHtml::_('stylesheet', JUri::root() . 'media/plg_content_qltabs/css/qltabs.css');
-        }
+        $wam = Factory::getApplication()->getDocument()->getWebAssetManager();
+        $wam->registerAndUseStyle('plg_content_qltabs', 'plg_content_qltabs/qltabs.css');
+        $wam->registerAndUseScript('plg_content_qltabs', 'plg_content_qltabs/qltabs.js');
     }
 
     /**

@@ -54,11 +54,11 @@ class plgContentQltabs extends CMSPlugin
 
         // check session if styles already loaded
         $boolAlreadyLoadedStyles = defined('qltabs_styles');
+        if (!$boolAlreadyLoadedStyles) define('qltabs_styles', true);
         // check session if styles already loaded
         if (!$boolAlreadyLoadedStyles) {
             if (2 == $this->objParams->get('qltabsjsactive', 1)) {
                 $this->includeScripts();
-                define('qltabs_styles', true);
             }
             //include scripts
             if ($this->objParams->get('style', 0)) {
@@ -84,7 +84,6 @@ class plgContentQltabs extends CMSPlugin
         // check session if styles already loaded
         if (!$boolAlreadyLoadedStyles) {
             $this->includeScripts();
-            define('qltabs_styles', true);
         }
 
         //clear tags, tries to avoid code like <p><div> etc.

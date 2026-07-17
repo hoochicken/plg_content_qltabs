@@ -7,7 +7,7 @@
  */
 
 //no direct access
-defined('_JEXEC') or die ('Restricted Access');
+defined('_JEXEC') || die ('Restricted Access');
 /** @var int $intCounter */
 /** @var array $tabAttributes */
 /** @var array $arr */
@@ -26,7 +26,7 @@ defined('_JEXEC') or die ('Restricted Access');
         </ul>
     </nav>
     <div class="qltabs">
-        <?php foreach ($arr as $k => $v) : ?>
+        <?php foreach ($arr as $v) : ?>
             <div class="qltab_content" id="<?= $v['id']; ?>_content">
                 <?= $v['content']; ?>
             </div>

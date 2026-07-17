@@ -7,7 +7,7 @@
  */
 
 //no direct access
-defined('_JEXEC') or die ('Restricted Access');
+defined('_JEXEC') || die ('Restricted Access');
 
 jimport('joomla.plugin.plugin');
 
@@ -22,23 +22,27 @@ class plgContentQltabs extends CMSPlugin
 {
 
     protected string $strCallStart = 'qltabs';
+    
     protected string $strCallStart2 = 'qltab';
+    
     protected string $strCallEnd = '/qltabs';
+    
     protected array $arrStates = [];
+    
     protected array $arrTabAttributes = [];
+    
     public Joomla\Registry\Registry $objParams;
+    
     private array $arrReplace = [];
+    
     private bool $debug = false;
-    private array $arrAttributes = [];
     private const ATTRIBUTES = ['class' => '', 'style' => '', 'id' => '', 'type' => '', 'accordeonSingleton' => '',];
 
     /**
      * onContentPrepare :: some kind of controller of plugin
-     * @param string $content
      * @param $objArticle
      * @param $objParams
-     * @param ?int $numPage
-     * @return bool|void
+     * @return bool|null
      * @throws Exception
      */
     public function onContentPrepare(string $content, &$objArticle, &$objParams, ?int $numPage = 0)
@@ -47,6 +51,7 @@ class plgContentQltabs extends CMSPlugin
         if ('com_finder.indexer' === $content) {
             return true;
         }
+        
         $this->objParams = $this->params;
 
         $input = Factory::getApplication()->input;
@@ -54,9 +59,9 @@ class plgContentQltabs extends CMSPlugin
 
         // check session if styles already loaded
         $boolAlreadyLoadedStyles = defined('qltabs_styles');
-        if (!$boolAlreadyLoadedStyles) define('qltabs_styles', true);
         // check session if styles already loaded
         if (!$boolAlreadyLoadedStyles) {
+            define('qltabs_styles', true);
             if (2 == $this->objParams->get('qltabsjsactive', 1)) {
                 $this->includeScripts();
             }
@@ -64,12 +69,10 @@ class plgContentQltabs extends CMSPlugin
             if ($this->objParams->get('style', 0)) {
                 $this->getStylesHorizontal();
             }
-
             //include vertical styles
             if ($this->objParams->get('verticalStyle', 0)) {
                 $this->getStylesVertical();
             }
-
             //include vertical styles
             if ($this->objParams->get('accordeonStyle', 0)) {
                 $this->getStylesAccordeon();
@@ -91,21 +94,21 @@ class plgContentQltabs extends CMSPlugin
 
         //replace tags
         $objArticle->text = $this->replaceStartTags($objArticle->text);
+        return null;
     }
 
     /**
      * replaces placeholder tags {qltabs ...} with actual html code
      * @param $strText
-     * @return mixed
      * @internal param $text
      */
-    private function replaceStartTags($strText)
+    private function replaceStartTags(string $strText): string|array
     {
         //get matches
         $arrMatches = $this->getMatches($strText);
 
         //if no matches found (can't be, but just in case ...)
-        if (0 === count($arrMatches) || !isset($arrMatches[0])) {
+        if ([] === $arrMatches || !isset($arrMatches[0])) {
             return $strText;
         }
 
@@ -115,18 +118,14 @@ class plgContentQltabs extends CMSPlugin
             $this->getArrayReplaces($numKey, $arrValue);
 
             //get html code
-            $this->arrReplace[$numKey]['html'] = $this->getHtml($numKey, $this->arrReplace[$numKey], $this->arrTabAttributes[$numKey]);
+            $this->arrReplace[$numKey]['html'] = $this->getHtml($this->arrTabAttributes[$numKey]);
             $strText = str_replace($arrValue, $this->arrReplace[$numKey]['html'], $strText);
         }
+        
         //return text
         return $strText;
     }
 
-    /**
-     * @param int $intCounter
-     * @param string $string
-     * @return void
-     */
     private function getArrayReplaces(int $intCounter, string $string): void
     {
         $this->arrReplace[$intCounter] = [];
@@ -138,6 +137,7 @@ class plgContentQltabs extends CMSPlugin
         } else {
             $this->initTagAttributes($intCounter);
         }
+        
         $strRegex = '~{' . $this->strCallStart2 . ' title?=?"(.+?)"}(.+?)(?={(' . $this->strCallStart2 . '|' . $this->strCallEnd . '))~s';
         preg_match_all($strRegex, $string, $arrMatches);
         if (!isset($arrMatches[0])) {
@@ -149,7 +149,7 @@ class plgContentQltabs extends CMSPlugin
             $strIdentifier .= '-' . uniqid();
         }
 
-        foreach ($arrMatches[0] as $k => $v) {
+        foreach (array_keys($arrMatches[0]) as $k) {
             $this->arrReplace[$intCounter][$k] = [];
             $this->arrReplace[$intCounter][$k]['title'] = $arrMatches[1][$k];
             $this->arrReplace[$intCounter][$k]['content'] = $arrMatches[2][$k];
@@ -157,14 +157,10 @@ class plgContentQltabs extends CMSPlugin
         }
     }
 
-    /**
-     * @param int $intCounter
-     * @param string $string
-     */
-    private function initTagAttributes(int $intCounter, string $string = '')
+    private function initTagAttributes(int $intCounter, string $string = ''): void
     {
         // set default values
-        $value = static::ATTRIBUTES;
+        $value = self::ATTRIBUTES;
 
         $arr = ['class', 'id', 'style', 'type', 'title',];
         $strRegex = '/(' . implode('|', $arr) . ')="(.*?)"/';
@@ -172,15 +168,18 @@ class plgContentQltabs extends CMSPlugin
         foreach ($arrMatches[1] as $k => $v) {
             $value[$v] = trim($arrMatches[2][$k]);
         }
+        
         if (false === strpos($value['class'], 'horizontal') && false === strpos($value['class'], 'vertical')) {
             $value['class'] .= ' ' . $this->objParams->get('defaultType', 'horizontal');
         }
+        
         if ('vertical' === $this->objParams->get('defaultType', 'horizontal')) {
             $numDefaultWidth = (int)$this->objParams->get('verticalWidthbuttons', 25);
             if (!preg_match('/width([0-9]{1,2})/i', $value['class'], $match)) {
                 $value['class'] .= ' qltabsWidth' . $numDefaultWidth;
             }
         }
+        
         if (!preg_match('/(plop|fadein|slidedown)/', $value['class'])) {
             if (false !== strpos($value['class'], 'horizontal')) {
                 $value['class'] .= ' ' . $this->objParams->get('displayEffect', 'plop');
@@ -188,12 +187,12 @@ class plgContentQltabs extends CMSPlugin
                 $value['class'] .= ' ' . $this->objParams->get('verticalDisplayEffect', 'plop');
             }
         }
+        
         $this->arrTabAttributes[$intCounter] = $value;
     }
 
     /**
      * @param $string
-     * @return array
      */
     private function getMatches($string): array
     {
@@ -206,7 +205,6 @@ class plgContentQltabs extends CMSPlugin
     /**
      * method to clear tags
      * @param $str
-     * @return mixed
      */
     private function clearTags($str): string
     {
@@ -225,30 +223,25 @@ class plgContentQltabs extends CMSPlugin
     /**
      * @param $str
      */
-    private function debugPrintText($str)
+    private function debugPrintText(string|array|null $str): void
     {
         if (!$this->debug) {
             return;
         }
+        
         echo '<pre>' . htmlspecialchars($str) . '</pre>';
     }
 
     /**
-     * @param int $intCounter
-     * @param array $arr
      * @param array $arrTabAttributes
-     * @return string
      */
-    private function getHtml(int $intCounter, array $arr, array $tabAttributes): string
+    private function getHtml(array $tabAttributes): string
     {
         $params = $this->objParams;
         $attributes = $this->arrStates;
         ob_start();
-        if (false !== strpos($tabAttributes['class'], 'accordeon')) {
-            $strLayoutFile = 'accordeon';
-        } else {
-            $strLayoutFile = 'default';
-        }
+        $strLayoutFile = false !== strpos($tabAttributes['class'], 'accordeon') ? 'accordeon' : 'default';
+        
         $strPathLayout = PluginHelper::getLayoutPath('content', 'qltabs', $strLayoutFile);
         include $strPathLayout;
         $html = ob_get_contents();
@@ -261,7 +254,7 @@ class plgContentQltabs extends CMSPlugin
      * @internal param string $text haystack
      * @internal param string $searchString needle, string to be searched
      */
-    private function getStylesHorizontal()
+    private function getStylesHorizontal(): void
     {
         $numBorderWidth = $this->objParams->get('borderwidth', '1');
         $strBorderColor = $this->objParams->get('bordercolor', '#e5e5e5');
@@ -295,7 +288,7 @@ class plgContentQltabs extends CMSPlugin
      * @internal param string $text haystack
      * @internal param string $searchString needle, string to be searched
      */
-    private function getStylesVertical()
+    private function getStylesVertical(): void
     {
         $borderWidth = $this->objParams->get('verticalBorderwidth', '1');
         $borderColor = $this->objParams->get('verticalBordercolor', '#e5e5e5');
@@ -329,7 +322,7 @@ class plgContentQltabs extends CMSPlugin
      * @internal param string $text haystack
      * @internal param string $searchString needle, string to be searched
      */
-    private function getStylesAccordeon()
+    private function getStylesAccordeon(): void
     {
         $borderWidth = $this->objParams->get('accordeonBorderwidth', '1');
         $borderColor = $this->objParams->get('accordeonBordercolor', '#e5e5e5');
@@ -361,11 +354,12 @@ class plgContentQltabs extends CMSPlugin
     /**
      *
      */
-    private function includeScripts()
+    private function includeScripts(): void
     {
         if ($this->objParams->get('jquery')) {
             HTMLHelper::_('jquery.framework');
         }
+        
         $wam = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wam->registerAndUseStyle('plg_content_qltabs', 'plg_content_qltabs/qltabs.css');
         $wam->registerAndUseScript('plg_content_qltabs', 'plg_content_qltabs/qltabs.js');
@@ -373,13 +367,14 @@ class plgContentQltabs extends CMSPlugin
 
     /**
      * @param $bg
-     * @param int $opacity
-     * @return string
      */
     private function getBgColor($bg, int $opacity = 100): string
     {
         include_once __DIR__ . '/php/clsPlgContentQltabsColor.php';
-        if (empty($bg)) $bg = '#000000';
+        if (empty($bg)) {
+            $bg = '#000000';
+        }
+        
         $objColor = new clsPlgContentQltabsColor;
         $arr = $objColor->html2rgb($bg);
         $numOpacity = $opacity / 100;

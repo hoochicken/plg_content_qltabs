@@ -1,18 +1,16 @@
 <?php
+declare(strict_types=1);
+
 /**
  * @package     plg_content_qltabs
  * @copyright   Copyright (C) 2026 Mareike Riegel
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-defined('_JEXEC') or die;
+defined('_JEXEC') || die;
 
 class clsPlgContentQltabsColor
 {
-    /**
-     * @param string $strColor
-     * @return array
-     */
-    function html2rgb(string $strColor = ''): array
+    public function html2rgb(string $strColor = ''): array
     {
         // strip '#' in beginning of string given
         if ('#' === $strColor[0]) {
@@ -38,7 +36,9 @@ class clsPlgContentQltabsColor
         //use default
         else {
             //set ffffff as default
-            $strR = $strG = $strB = 'ff';
+            $strR = 'ff';
+            $strG = 'ff';
+            $strB = 'ff';
         }
 
         //turn hex into dec

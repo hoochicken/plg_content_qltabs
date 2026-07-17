@@ -306,7 +306,9 @@ class plgContentQltabs extends CMSPlugin
         $style[] = '.qltabs_container.vertical > .qltabs_head {}';
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > .inner {border-bottom:' . $borderWidth . 'px ' . $borderType . ' ' . $borderColor . ';background:' . $backgroundColorInactive . ';color:' . $fontColorInactive . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head:last-child > .inner {border-bottom:0;}';
+        // maybe bug this line =>
         $style[] = '.qltabs_container.vertical > .qltabs_head .section.active .qltab_head > .inner {background:' . $backgroundColor . ';color:' . $buttonFontColor . ';}';
+        $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head.active > .inner {background:' . $backgroundColor . ';color:' . $buttonFontColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs_head .qltab_head > .inner:focus {background:' . $bgFocus . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs {background:' . $backgroundColor . ';}';
         $style[] = '.qltabs_container.vertical > .qltabs > .qltab_content {display:none;background:' . $backgroundColor . ';color:' . $fontColor . ';}';

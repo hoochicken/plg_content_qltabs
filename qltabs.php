@@ -118,7 +118,7 @@ class plgContentQltabs extends CMSPlugin
             $this->getArrayReplaces($numKey, $arrValue);
 
             //get html code
-            $this->arrReplace[$numKey]['html'] = $this->getHtml($this->arrTabAttributes[$numKey]);
+            $this->arrReplace[$numKey]['html'] = $this->getHtml($numKey, $this->arrTabAttributes[$numKey]);
             $strText = str_replace($arrValue, $this->arrReplace[$numKey]['html'], $strText);
         }
         
@@ -235,11 +235,13 @@ class plgContentQltabs extends CMSPlugin
     /**
      * @param array $arrTabAttributes
      */
-    private function getHtml(array $tabAttributes): string
+    private function getHtml($numKey, array $tabAttributes): string
     {
         $params = $this->objParams;
         $attributes = $this->arrStates;
         ob_start();
+        $intCounter = $numKey;
+        $tabsData = $this->arrReplace[$intCounter];
         $strLayoutFile = false !== strpos($tabAttributes['class'], 'accordeon') ? 'accordeon' : 'default';
         
         $strPathLayout = PluginHelper::getLayoutPath('content', 'qltabs', $strLayoutFile);

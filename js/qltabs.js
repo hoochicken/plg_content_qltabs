@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (effect === 'fade') {
       element.animate(
-        [{opacity: 0}, {opacity: 1}],
-        {duration: 400, easing: 'ease', fill: 'none'}
+        [{ opacity: 0 }, { opacity: 1 }],
+        { duration: 400, easing: 'ease', fill: 'none' }
       );
       return;
     }
@@ -39,18 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
         element.style.removeProperty('overflow');
         element.style.removeProperty('opacity');
       };
-      return;
     }
-
   }
 
   /**
    * Hide an element.
    */
   function qlHide(element) {
-    if (!element) {
-      return
-    }
+    if (!element) return;
     element.style.display = 'none';
   }
 
@@ -58,15 +54,18 @@ document.addEventListener('DOMContentLoaded', function () {
    * Determine the animation for a tab container.
    */
   function qlGetEffect(container) {
+    if (!container) return 'none';
     if (container.classList.contains('fadein')) return 'fade';
     if (container.classList.contains('slidedown')) return 'slide';
     return 'none';
   }
 
   /**
-   * Activate a regular tab.
+   * Activate a regular tab after a user click.
    */
   function qlActivateTab(header, animate = true) {
+    if (!header) return;
+
     const container = header.closest('.qltabs_container');
     if (!container) return;
 
@@ -96,10 +95,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /**
-   * Initialize regular tabs.
+   * Initialize regular tab containers.
    */
   document.querySelectorAll('.qltabs_container').forEach(function (container) {
-    // Accordions are handled separately.
+    // Accordions are initialized separately.
     if (container.querySelector('.qltabs_accordeon')) return;
 
     const headers = container.querySelectorAll(
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll(
     '.qltabs_accordeon.multiton, .qltabs_accordeon.singleton'
   ).forEach(function (accordion) {
-
     const allowMultiple = accordion.classList.contains('multiton');
 
     accordion.querySelectorAll('.qltab_head').forEach(function (header) {
@@ -147,13 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const panel = header.nextElementSibling;
         const section = header.closest('.section');
 
-        if (!panel || !panel.classList.contains('qltab_content')) {
-          return;
-        }
-
+        if (!panel || !panel.classList.contains('qltab_content')) return;
         if (!section) return;
 
-        const isOpen = getComputedStyle(panel).display !== 'none';
+        const isOpen = window.getComputedStyle(panel).display !== 'none';
 
         if (!allowMultiple) {
           accordion.querySelectorAll('.section').forEach(function (item) {
@@ -175,16 +170,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Open tabs specified by the URL.
+  // Open tabs specified by the URL after the tab handlers are initialized.
   qlSetActiveTabl();
-
 });
 
-
 /**
- * Activate tabs specified by ?qltab=header-id
- *
+ * Activate tabs specified by #qltab=header-id.
  * Multiple header IDs can be comma-separated.
+ *
+ * IDs are processed in URL order. For nested tabs, put the parent tab first,
+ * followed by the nested tab.
  */
 function qlSetActiveTabl() {
   const tabs = qlGetUrlParam('qltab');
@@ -193,22 +188,19 @@ function qlSetActiveTabl() {
 
   tabs.split(',').forEach(function (id) {
     const header = document.getElementById(id.trim());
-
     if (!header) return;
 
     const accordion = header.closest('.qltabs_accordeon');
 
     if (!accordion) {
       qlActivateTablFromUrl(header);
-      return
+      return;
     }
 
     const panel = header.nextElementSibling;
     const section = header.closest('.section');
 
-    if (!panel || !panel.classList.contains('qltab_content')) {
-      return;
-    }
+    if (!panel || !panel.classList.contains('qltab_content')) return;
 
     const allowMultiple = accordion.classList.contains('multiton');
 
@@ -222,20 +214,22 @@ function qlSetActiveTabl() {
     }
 
     panel.style.display = 'block';
-    if (section) section.classList.add('active');
 
+    if (section) {
+      section.classList.add('active');
+    }
   });
 
   return false;
 }
 
-
 /**
- * Activate a regular tab from the URL.
+ * Activate a regular tab from the URL without animation.
  */
 function qlActivateTablFromUrl(header) {
-  const container = header.closest('.qltabs_container');
+  if (!header) return;
 
+  const container = header.closest('.qltabs_container');
   if (!container) return;
 
   const tabs = container.querySelector(':scope > .qltabs');
@@ -260,20 +254,18 @@ function qlActivateTablFromUrl(header) {
 }
 
 /**
- * Get a URL query parameter.
+ * Get a URL hash parameter.
  * Returns the parameter value, or false if it is missing.
+ *
+ * Example:
+ * #qltab=outer-tab-id,inner-tab-id
  */
 function qlGetUrlParam(variable) {
+  const hash = window.location.hash.slice(1);
 
-  const url = window.location.hash.slice(1) || false
-  if (false === url || url.length === 0) {
-    return false
-  }
-  const urlAnchors = new URLSearchParams(url)
-  if (false === url || url.length === 0) {
-    return false
-  }
-  return urlAnchors.has(variable)
-    ? urlAnchors.get(variable)
-    : false;
+  if (!hash) return false;
+
+  const params = new URLSearchParams(hash);
+
+  return params.has(variable) ? params.get(variable) : false;
 }

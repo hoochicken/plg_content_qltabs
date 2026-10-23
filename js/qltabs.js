@@ -5,15 +5,16 @@
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+
+/**
+ * Hide an element.
+ */
+function qlHide(element) {
+  if (!element) return;
+  element.style.display = 'none';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  
-  /**
-   * Hide an element.
-   */
-  function qlHide(element) {
-    if (!element) return;
-    element.style.display = 'none';
-  }
 
   /**
    * Show an element with a vanilla JS animation.

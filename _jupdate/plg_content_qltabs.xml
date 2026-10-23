@@ -5,7 +5,7 @@
 		<type>plugin</type>
 		<folder>content</folder>
 		<element>qltabs</element>
-		<version>4.4.1</version>
+		<version>4.4.2</version>
 		<description>Content plugin for parsing text as markdown</description>
 		<infourl title="ql.de - Blackforest Software">https://ql.de</infourl>
 		<downloads>

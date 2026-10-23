@@ -4,122 +4,276 @@
  * @author         Mareike Riegel info@ql.de
  * @license        GNU General Public License version 2 or later; see LICENSE.txt
  */
-jQuery(document).ready(function () {
-  // TABS set first child active to be displayed
-  jQuery('.qltabs_container > .qltabs_head').find('li:first').addClass('active');
 
-  // TAB CONTENTS set first child active to be displayed
-  jQuery('.qltabs_container > .qltabs').children('.qltab_content:first-child').addClass('active');
-  jQuery('.qltabs_container.default > .qltabs').children('.qltab_content:first-child').fadeIn();
-  jQuery('.qltabs_container.fadein > .qltabs').children('.qltab_content:first-child').fadeIn();
-  jQuery('.qltabs_container.slidedown > .qltabs').children('.qltab_content:first-child').slideDown();
-  jQuery('.qltabs_container.qltabs_accordeon > .qltabs').children('.qltab_content:first-child').slideDown();
+document.addEventListener('DOMContentLoaded', function () {
 
+  /**
+   * Show an element with a vanilla JS animation.
+   */
+  function qlShow(element, effect = 'none') {
+    if (!element) return;
+
+    element.style.display = 'block';
+
+    if (effect === 'fade') {
+      element.animate(
+        [{opacity: 0}, {opacity: 1}],
+        {duration: 400, easing: 'ease', fill: 'none'}
+      );
+      return;
+    }
+
+    if (effect === 'slide') {
+      const height = element.scrollHeight;
+
+      const animation = element.animate(
+        [
+          { height: '0px', opacity: 0, overflow: 'hidden' },
+          { height: height + 'px', opacity: 1, overflow: 'hidden' }
+        ],
+        { duration: 400, easing: 'ease', fill: 'none' }
+      );
+
+      animation.onfinish = function () {
+        element.style.removeProperty('height');
+        element.style.removeProperty('overflow');
+        element.style.removeProperty('opacity');
+      };
+      return;
+    }
+
+  }
+
+  /**
+   * Hide an element.
+   */
+  function qlHide(element) {
+    if (!element) {
+      return
+    }
+    element.style.display = 'none';
+  }
+
+  /**
+   * Determine the animation for a tab container.
+   */
+  function qlGetEffect(container) {
+    if (container.classList.contains('fadein')) return 'fade';
+    if (container.classList.contains('slidedown')) return 'slide';
+    return 'none';
+  }
+
+  /**
+   * Activate a regular tab.
+   */
+  function qlActivateTab(header, animate = true) {
+    const container = header.closest('.qltabs_container');
+    if (!container) return;
+
+    const tabs = container.querySelector(':scope > .qltabs');
+    if (!tabs) return;
+
+    const panel = document.getElementById(header.id + '_content');
+
+    if (!panel || !tabs.contains(panel)) return;
+
+    container.querySelectorAll(
+      ':scope > .qltabs_head .qltab_head'
+    ).forEach(function (item) {
+      item.classList.toggle('active', item === header);
+    });
+
+    tabs.querySelectorAll(':scope > .qltab_content').forEach(function (item) {
+      item.classList.toggle('active', item === panel);
+      qlHide(item);
+    });
+
+    if (animate) {
+      qlShow(panel, qlGetEffect(container));
+    } else {
+      panel.style.display = 'block';
+    }
+  }
+
+  /**
+   * Initialize regular tabs.
+   */
+  document.querySelectorAll('.qltabs_container').forEach(function (container) {
+    // Accordions are handled separately.
+    if (container.querySelector('.qltabs_accordeon')) return;
+
+    const headers = container.querySelectorAll(
+      ':scope > .qltabs_head .qltab_head'
+    );
+
+    const tabs = container.querySelector(':scope > .qltabs');
+
+    if (!headers.length || !tabs) return;
+
+    const panels = tabs.querySelectorAll(':scope > .qltab_content');
+
+    // Initialize all panels as hidden.
+    panels.forEach(function (panel) {
+      panel.classList.remove('active');
+      qlHide(panel);
+    });
+
+    headers.forEach(function (header) {
+      header.classList.remove('active');
+
+      header.addEventListener('click', function (event) {
+        event.preventDefault();
+        qlActivateTab(header);
+      });
+    });
+
+    // First tab active by default.
+    qlActivateTab(headers[0], false);
+  });
+
+  /**
+   * Initialize accordion tabs.
+   */
+  document.querySelectorAll(
+    '.qltabs_accordeon.multiton, .qltabs_accordeon.singleton'
+  ).forEach(function (accordion) {
+
+    const allowMultiple = accordion.classList.contains('multiton');
+
+    accordion.querySelectorAll('.qltab_head').forEach(function (header) {
+      header.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const panel = header.nextElementSibling;
+        const section = header.closest('.section');
+
+        if (!panel || !panel.classList.contains('qltab_content')) {
+          return;
+        }
+
+        if (!section) return;
+
+        const isOpen = getComputedStyle(panel).display !== 'none';
+
+        if (!allowMultiple) {
+          accordion.querySelectorAll('.section').forEach(function (item) {
+            item.classList.remove('active');
+
+            const content = item.querySelector('.qltab_content');
+            if (content) qlHide(content);
+          });
+        }
+
+        if (isOpen) {
+          section.classList.remove('active');
+          qlHide(panel);
+        } else {
+          section.classList.add('active');
+          qlShow(panel, 'slide');
+        }
+      });
+    });
+  });
+
+  // Open tabs specified by the URL.
   qlSetActiveTabl();
 
-  jQuery('.qltabs_container.default > .qltabs_head .qltab_head').click(function (el) {
-    let elementClicked = jQuery(el.currentTarget);
-
-    // adjust table_head
-    elementClicked.siblings('.qltab_head').removeClass('active');
-    elementClicked.addClass('active');
-
-    // adjust tabs with content = display tab clicked on
-    let contentTabs = elementClicked.closest('.qltabs_container').children('.qltabs').children('.qltab_content');
-    contentTabs.removeClass('active').hide();
-    let classs = jQuery(this).attr('id') + '_content';
-    elementClicked.closest('.qltabs_container').children('.qltabs').children('#' + classs).addClass('active').show();
-    return false;
-  });
-
-  jQuery('.qltabs_accordeon.multiton .qltab_head').click(function () {
-    let display = jQuery(this).next('.qltab_content').css('display');
-    if ('block' === display) {
-      jQuery(this).next('.qltab_content').slideUp();
-      jQuery(this).closest('.section').removeClass('active');
-    } else {
-      jQuery(this).next('.qltab_content').slideDown();
-      jQuery(this).closest('.section').addClass('active');
-    }
-    return false;
-  });
-
-  jQuery('.qltabs_accordeon.singleton .qltab_head').click(function () {
-    let display = jQuery(this).next('.qltab_content').css('display');
-    jQuery(this).closest('.qltabs_accordeon.singleton').find('.section').removeClass('active');
-    jQuery(this).closest('.qltabs_accordeon').find('.qltab_content').slideUp();
-    if ('block' === display) {
-      jQuery(this).next('.qltab_content').slideUp();
-      jQuery(this).closest('.section').removeClass('active');
-    } else {
-      jQuery(this).next('.qltab_content').slideDown();
-      jQuery(this).closest('.section').addClass('active');
-    }
-    return false;
-  });
-
-  jQuery('.qltabs_container.fadein.default > .qltabs_head .qltab_head').click(function () {
-    jQuery(this).parent('div').next('div').children('div.qltab_content').css('display', 'none');
-    jQuery(this).parent('div').next('div').children('div.qltab_content.active').fadeIn('slow');
-    return false;
-  });
-
-  jQuery('.qltabs_container.slidedown.default > .qltabs_head .qltab_head').click(function () {
-    jQuery(this).parent('div').next('div').children('div.qltab_content').slideUp();
-    jQuery(this).parent('div').next('div').children('div.qltab_content.active').slideDown();
-    return false;
-  });
 });
 
+
 /**
- * qlSetActiveTabl()
- * function to set a tab into active if set so by get-params in url
+ * Activate tabs specified by ?qltab=header-id
+ *
+ * Multiple header IDs can be comma-separated.
  */
 function qlSetActiveTabl() {
-  let tabs = qlGetUrlParam('qltab');
-  if ('' === tabs || false === tabs) {
-    return;
-  }
+  const tabs = qlGetUrlParam('qltab');
 
-  let tabsToOpen = tabs.split(",");
-  for (let i = 0; i < tabsToOpen.length; i++) {
-    let idTabHeader = tabsToOpen[i];
-    if (jQuery('#' + idTabHeader).qlExists()) {
-      let tabsFamily = tabs.split("-");
-      tabsFamily = tabsFamily[0];
-      let idTabContainer = idTabHeader + '_content';
+  if (!tabs) return false;
 
-      jQuery('#' + idTabHeader).parent('div').children('.qltab_head').removeClass('active');
-      jQuery('#' + idTabHeader).attr('class', jQuery('#' + idTabHeader).attr('class') + ' active');
-      jQuery('.' + tabsFamily).children('.qltab_content').hide(0);
-      jQuery('.' + tabsFamily).children('.qltab_content').removeClass('active');
-      jQuery('#' + idTabContainer).show(0);
-      jQuery('#' + idTabContainer).attr('class', jQuery('#' + idTabContainer).attr('class') + ' active');
+  tabs.split(',').forEach(function (id) {
+    const header = document.getElementById(id.trim());
+
+    if (!header) return;
+
+    const accordion = header.closest('.qltabs_accordeon');
+
+    if (!accordion) {
+      qlActivateTablFromUrl(header);
+      return
     }
-  }
-  return (false);
+
+    const panel = header.nextElementSibling;
+    const section = header.closest('.section');
+
+    if (!panel || !panel.classList.contains('qltab_content')) {
+      return;
+    }
+
+    const allowMultiple = accordion.classList.contains('multiton');
+
+    if (!allowMultiple) {
+      accordion.querySelectorAll('.section').forEach(function (item) {
+        item.classList.remove('active');
+
+        const content = item.querySelector('.qltab_content');
+        if (content) qlHide(content);
+      });
+    }
+
+    panel.style.display = 'block';
+    if (section) section.classList.add('active');
+
+  });
+
+  return false;
 }
 
+
 /**
- * function to check, whether an html exists or not
+ * Activate a regular tab from the URL.
  */
-jQuery.fn.qlExists = function () {
-  return this.length > 0;
+function qlActivateTablFromUrl(header) {
+  const container = header.closest('.qltabs_container');
+
+  if (!container) return;
+
+  const tabs = container.querySelector(':scope > .qltabs');
+  if (!tabs) return;
+
+  const panel = document.getElementById(header.id + '_content');
+
+  if (!panel || !tabs.contains(panel)) return;
+
+  container.querySelectorAll(
+    ':scope > .qltabs_head .qltab_head'
+  ).forEach(function (item) {
+    item.classList.toggle('active', item === header);
+  });
+
+  tabs.querySelectorAll(':scope > .qltab_content').forEach(function (item) {
+    item.classList.toggle('active', item === panel);
+    qlHide(item);
+  });
+
+  panel.style.display = 'block';
 }
 
 /**
- * getUrlParam
- * @param variable whose value is to be returned
- * @return {*}
+ * Get a URL query parameter.
+ * Returns the parameter value, or false if it is missing.
  */
 function qlGetUrlParam(variable) {
-  let query = window.location.search.substring(1);
-  let vars = query.split("&");
-  for (let i = 0; i < vars.length; i++) {
-    let getVar = vars[i].split("=");
-    if (getVar[0] === variable) {
-      return getVar[1];
-    }
+
+  const url = window.location.hash.slice(1) || false
+  if (false === url || url.length === 0) {
+    return false
   }
-  return (false);
+  const urlAnchors = new URLSearchParams(url)
+  if (false === url || url.length === 0) {
+    return false
+  }
+  return urlAnchors.has(variable)
+    ? urlAnchors.get(variable)
+    : false;
 }
